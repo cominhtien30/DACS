@@ -115,7 +115,7 @@ ob_start();
                             <img class="product__details__pic__item--large"
                                 src="admin/uploads/<?php echo $result_1pro['image']?>" alt="">
                         </div>
-                       <!--  <div class="product__details__pic__slider owl-carousel">
+                        <div class="product__details__pic__slider owl-carousel">
                             <img data-imgbigurl="img/product/details/product-details-2.jpg"
                                 src="img/product/details/thumb-1.jpg" alt="">
                             <img data-imgbigurl="img/product/details/product-details-3.jpg"
@@ -124,7 +124,7 @@ ob_start();
                                 src="img/product/details/thumb-3.jpg" alt="">
                             <img data-imgbigurl="img/product/details/product-details-4.jpg"
                                 src="img/product/details/thumb-4.jpg" alt="">
-                        </div> -->
+                        </div>
                     </div>
                 </div>
 

@@ -97,7 +97,7 @@ $buyer= Session::get('customer_user');
                         <li><a href="./blog-details.php">Blog Details</a></li>
                     </ul>
                 </li>
-                <li><a href="./blog.php">Blog</a></li>
+                <li><a href="./profile.php">Profile</a></li>
                 <li><a href="./contact.php">Contact</a></li>
             </ul>
         </nav>
@@ -184,7 +184,17 @@ $buyer= Session::get('customer_user');
                                     <li><a href="./blog-details.php">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.php">Blog</a></li>
+                             <?php 
+                                 $login = Session::get('customer_login');
+                                 if($login == false){
+                                   echo '';
+                                  }else
+                                  {
+                                     echo  '<li><a href="./profile.php">Profile</a></li>';
+                                   }
+
+                                     ?>
+                            
                             <li><a href="./contact.php">Contact</a></li>
                         </ul>
                     </nav>

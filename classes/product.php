@@ -68,7 +68,7 @@
 
 
 		public function Show_Product(){
-			$query = "SELECT A.productName,A.image, C.brandName,B.catName,A.price,A.type,A.description FROM tbl_product A, tbl_category B, tbl_brand C WHERE A.catId=B.catId AND A.brandId=C.brandId GROUP BY A.productName, A.description  ORDER BY A.productName DESC";
+			$query = "SELECT A.productName,A.image, C.brandName,B.catName,A.price,A.type,A.description FROM tbl_product A, tbl_category B, tbl_brand C WHERE A.catId=B.catId AND A.brandId=C.brandId GROUP BY A.productName, A.description, A.price  ORDER BY A.productName DESC";
 			$result = $this->db->select($query);
 			return $result;
 		}
@@ -152,12 +152,17 @@
 			$result = $this->db->delete($query);
 			return $result;		
 		}
+		public function delete_productName($name){
+			$query = "DELETE  FROM tbl_product WHERE productName = '$name' ";
+			$result = $this->db->delete($query);
+			return $result;		
+		}
 		public function getproductByid($id){
 			$query = "SELECT * FROM tbl_product WHERE productId = '$id'";
 			$result = $this->db->select($query);
 			return $result;
 		}
-
+		// public function insert_thumb()
 
 		/////////////////////////////////////
 		public function Get_ProductFeathered(){

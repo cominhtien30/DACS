@@ -1,8 +1,14 @@
-<?php 
+<?php ob_start();
     include 'inc/header.php';
 
 ?>
+<?php 
+     $login = Session::get('customer_login');
+    if($login == false){
+     header('Location:login.php');
+     }
 
+?>
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
@@ -164,5 +170,5 @@
     
     include 'inc/footer.php';
     
-
+ob_end_flush();
 ?>

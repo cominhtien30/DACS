@@ -11,25 +11,22 @@ include('includes/navbar.php');
   $brand = new brand();
   $cat = new category();
   $prod = new product();
-  // if(isset($_POST["delete_id"])){
-  //   $id = $_POST["delete_id"];
-  //       $delbrand = $brand->delete_Brand($id);
-  // }
-  if($_SERVER['REQUEST_METHOD'] == 'POST' ){
+  
+          if(isset($_POST["delete_id"])){
+          $id = $_POST["delete_id"];
+        $delbrand = $prod->delete_productName($id);
+          }
+   
+ ?>
+
+<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<?php 
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
 
        
 
         $insertProd = $prod->insert_product($_POST,$_FILES);
     }
- ?>
-
-<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<?php 
-        // if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-        // $brandName = $_POST['brandName']; 
-        // $insertName = $brand->insert_Brand($brandName);
-    //}
        ?>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -105,11 +102,19 @@ include('includes/navbar.php');
                 <label> Description </label>
                 <input type="text" name="description" class="form-control" placeholder="Enter Description">
             </div>
-                        <div class="form-group">
+            <div class="form-group">
 
                 <label> Image </label>
                 <input type="file" name="image" class="form-control" >
             </div>
+<!--             <div class="form-group">
+
+                <label> Image Thumbnail </label>
+                <input type="file" name="thumb1" class="form-control" >
+                <input type="file" name="thumb2" class="form-control" >
+                <input type="file" name="thumb3" class="form-control" >
+                <input type="file" name="thumb4" class="form-control" >
+            </div> -->
             <div class="form-group">
               <label >Type</label>
                 <select id="type" name="type" class="form-control">
@@ -198,7 +203,7 @@ include('includes/navbar.php');
             </td>
             <td>
                 <form action="" method="post">
-                  <input type="hidden" name="delete_id" value="<?php echo $result['brandId']?>">
+                  <input type="hidden" name="delete_id" value="<?php echo $result['productName']?>">
                   <button  type="submit" name="delete_btn" class="btn btn-danger">DELETE</button>
                 </form>
             </td>
