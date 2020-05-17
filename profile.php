@@ -155,16 +155,23 @@
         </div>
     </div>
  </div>
+ 
         </div>
     </section>
     </form>
     <!-- Checkout Section End -->
     <!-- Footer Section Begin -->
     <style type="text/css" media="screen">
-        input{
-            width: 50%;
+         input{
+            width: 100%;
             text-align: center;
-        }   
+            font-size: 16px;
+            font-weight: 700;
+            color: #444;
+            height: 45px;
+         
+         
+         }
     </style>
    <?php
     

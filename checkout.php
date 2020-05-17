@@ -209,7 +209,7 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div> -->
-                                <a href="bill.php"  type="submit" name="submit" style="margin-left: 70px; font-size: 30px; border: 5px solid black; padding: 0 10px;background:#7fad39; color: white; ">Place Order</a>
+                                <a href="bill.php"  type="submit" name="submit" style="margin-left: 70px; font-size: 30px;  padding: 0 10px;background:#7fad39; color: white; font-weight: 600;border-radius: 3px; ">Place Order</a>
                             </div>
                         </div>
                     </div>
