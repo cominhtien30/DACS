@@ -10,15 +10,14 @@ include('includes/navbar.php');
         echo "<script>window.location = 'brandlist.php'</script>";
         
     }else{
-        $id = $_GET['username'];
+        $user = $_GET['username'];
     }
-    // if(isset($_POST["edit"])){
+     if(isset($_POST["save"])){
 
-    //     $brandName = $_POST['brandName'];
+         $update_admin = $admin->update_admin($_POST,$user);
        
 
-    //     $updateBrand = $brand->update_brand($brandName,$id);
-    // }
+     }
 ?>
 
 <div class="container-fluid">
@@ -32,13 +31,8 @@ include('includes/navbar.php');
   </div>
 
   <div class="card-body">
-  <?php
-                    // if(isset($update_brand)){
-                    //     echo $update_brand;
-                    // }
-                ?>
                 <?php 
-                    $adminn= $admin->get_Info($id);
+                    $adminn= $admin->get_Info($user);
                     if($adminn){
                         while($result = $adminn->fetch_assoc()){
                 ?> 
@@ -60,8 +54,12 @@ include('includes/navbar.php');
                 <input type="email" name="email" class="form-control" value="<?php echo $result['admin_Email'] ?>">
             </div>
             <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Enter Password">
+                <label>Change New Password</label>
+                <input type="password" name="changepassword" class="form-control" placeholder="Enter New Password">
+            </div>
+            <div class="form-group">
+                <label>Repeat New Password</label>
+                <input type="password" name="newpassword" class="form-control" placeholder="Enter Repeat Password">
             </div>
             <div class="form-group">
               <label >Level</label>
@@ -72,10 +70,12 @@ include('includes/navbar.php');
                 </select>
             </div>
         
-       
+       <?php if (isset($update_admin)) {
+                echo $update_admin;
+       } ?>
         <div class="modal-footer">
             <button onclick="location.href='listadmin.php'" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+            <button type="submit" name="save" class="btn btn-primary">Save</button>
         </div>
       </form>
        <?php 
