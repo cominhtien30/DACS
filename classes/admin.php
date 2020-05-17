@@ -1,4 +1,4 @@
-<?php 
+    <?php 
 	$filepath = realpath(dirname(__FILE__));
 	include_once ("../lib/session.php");
 	Session::checkLogin();
