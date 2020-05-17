@@ -68,7 +68,7 @@
 
 
 		public function Show_Product(){
-			$query = "SELECT A.productName,A.image, C.brandName,B.catName,A.price,A.type,A.description FROM tbl_product A, tbl_category B, tbl_brand C WHERE A.catId=B.catId AND A.brandId=C.brandId GROUP BY A.productName, A.description, A.price  ORDER BY A.productName DESC";
+			$query = "SELECT A.productName,A.image,A.size, C.brandName,B.catName,A.price,A.type,A.description FROM tbl_product A, tbl_category B, tbl_brand C WHERE A.catId=B.catId AND A.brandId=C.brandId GROUP BY A.productName, A.description, A.price  ORDER BY A.productName DESC";
 			$result = $this->db->select($query);
 			return $result;
 		}
