@@ -98,9 +98,10 @@
 			$username = mysqli_real_escape_string($this->db->link, $data['username']);
 			$name = mysqli_real_escape_string($this->db->link, $data['name']);
 			$email = mysqli_real_escape_string($this->db->link, $data['email']);
-			$repeat_password = mysqli_real_escape_string($this->db->link, $data['newpassword']);
-			if ($new_password==$repeat_password) {
-				$query="UPDATE tbl_admin SET admin_Pass=md5('$repeat_password'),admin_User='$username',admin_Name='$name' WHERE admin_User = '$user'";
+			//$email = mysqli_real_escape_string($this->db->link, $data['email']);
+			//$repeat_password = mysqli_real_escape_string($this->db->link, $data['newpassword']);
+			
+				$query="UPDATE tbl_admin SET admin_Pass=md5('$new_password'),admin_User='$username',admin_Name='$name' WHERE admin_User = '$user'";
 				$result=$this->db->update($query);
 				if ($result) {
 					$alert='<span class="text-success">Cập Nhật Thành Công</span>';
@@ -110,9 +111,10 @@
 					$alert='<span class="text-danger">Mật Khẩu Không Khớp</span>';
 					return $alert;
 				}
+				return $result;
 				
-			}
-			return $result;
+			
+			
 		}
 		public function reset_Password($user){
 			$query = "UPDATE tbl_admin SET admin_Pass = 'c4ca4238a0b923820dcc509a6f75849b' WHERE admin_User = '$user'";

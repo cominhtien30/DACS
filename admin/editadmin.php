@@ -57,10 +57,6 @@ include('includes/navbar.php');
                 <label>Change New Password</label>
                 <input type="password" name="changepassword" class="form-control" placeholder="Enter New Password">
             </div>
-            <div class="form-group">
-                <label>Repeat New Password</label>
-                <input type="password" name="newpassword" class="form-control" placeholder="Enter Repeat Password">
-            </div>
         
        <?php if (isset($update_admin)) {
                 echo $update_admin;
