@@ -40,6 +40,9 @@ $buyer= Session::get('customer_user');
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -138,15 +141,20 @@ $buyer= Session::get('customer_user');
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
-                            <div class="header__top__right__language">
-                                <img src="img/language.png" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
-                            </div>
+                            <?php 
+                                    $check = Session::get('customer_login');
+                                    if($check== false){
+                            ?>
+                                          
+                                 <div class="header__top__right__social">
+                                     <a href="register.php"><i ></i> Register</a>
+                                 </div><?php 
+                                  }
+                             ?>
+                                
+                                
+                               
+                            
                             <div class="header__top__right__auth">
                                 <?php 
                                       $check = Session::get('customer_login');
@@ -191,11 +199,12 @@ $buyer= Session::get('customer_user');
                                   }else
                                   {
                                      echo  '<li><a href="./profile.php">Profile</a></li>';
+                                     echo  '<li><a href="./bill.php">My Bill</a></li>';
                                    }
 
                                      ?>
                             
-                            <li><a href="./contact.php">Contact</a></li>
+                            
                         </ul>
                     </nav>
                 </div>

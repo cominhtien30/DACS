@@ -7,7 +7,7 @@ include('includes/navbar.php');
 <?php 
     $admin = new admin();
     if(!isset($_GET['username']) || $_GET['username']==NULL){
-        echo "<script>window.location = 'brandlist.php'</script>";
+        echo "<script>window.location = 'login.php'</script>";
         
     }else{
         $user = $_GET['username'];
@@ -54,9 +54,10 @@ include('includes/navbar.php');
                 <input type="email" name="email" class="form-control" value="<?php echo $result['admin_Email'] ?>">
             </div>
             <div class="form-group">
-                <label>Change New Password</label>
+                <label>Password</label>
                 <input type="password" name="changepassword" class="form-control" placeholder="Enter New Password">
             </div>
+            
         
        <?php if (isset($update_admin)) {
                 echo $update_admin;

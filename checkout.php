@@ -1,11 +1,42 @@
-<?php 
+<?php ob_start();
     include 'inc/header.php';
 
 ?>
-<?php  ?>
-    <!-- Header Section End -->
+<?php 
+     $login = Session::get('customer_login');
+    if($login == false){
+     header('Location:login.php');
+     }
 
-    <!-- Hero Section Begin -->
+?>
+<?php 
+    $a=Session::get('qtt');
+    if($a == '0')
+        header('Location:index.php');
+
+ ?>
+ 
+<?php 
+    
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_buy'])){
+
+       $buyer= Session::get('customer_user');
+        $insertOrder = $ct->insert_Order($_POST,$buyer);
+        $MaxId = $ct->get_Max_Id();
+        if($MaxId){
+            while ($result = $MaxId->fetch_assoc()){
+        
+        $insertOrderDetails = $ct->insert_OrderDetail($result['order_Id']);
+            }
+        }
+        $destroyCart = $ct->Del_cart_by_Session();
+        header('Location:success.php');
+
+    }
+    // else{
+    //   echo "<script>window.location = '404.php'</script>";
+    // }
+?>
     
 
     <section class="hero hero-normal">
@@ -61,7 +92,7 @@
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="img/background.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -79,15 +110,14 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Checkout Section Begin -->
-    <form action="" method="post">  
-    <section class="checkout spad">
+       <section class="checkout spad">
         <div class="container">
             
             <div class="checkout__form">
                 <h4>Billing Details</h4>
                 <form action="" method="post">
                     <div class="row">
-                        <div class="col-lg-8 col-md-6">
+                        <div class="col-lg-8 csol-md-6">
                            <?php 
                                 $userr= Session::get('customer_user');
                                 $show_Cus = $user->Get_User($userr);
@@ -109,6 +139,7 @@
                                     </div>
                                 </div>
                             </div> -->
+
                             <div class="checkout__input">
                                 <p>Name<span>*</span></p>
                                 <input type="text" name="name" value="<?php echo $result['nameCus'] ?>">
@@ -118,15 +149,40 @@
                             
                             <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
-                                <input type="text" placeholder="Town/City" >
+                                <select  id="city" name="city" >
+                        <?php 
+                            $citylist = $city->Show_City();
+                            if($citylist){
+                                while ($resultCity = $citylist->fetch_assoc()){
+
+
+                         ?>
+                        <option
+                            <?php 
+                                if($resultCity['matp'] == $result['TP']){
+                                    echo 'selected';
+                                }
+                             ?>
+                         value="<?php echo $resultCity['matp']?>" data-name="<?= $result['matp'] ?>"><?php echo $resultCity['name'] ?></option>
+                        <?php 
+
+                           }
+                            }
+
+                     ?>
+                        </select>
                             </div>
                             <div class="checkout__input">
                                 <p>District<span>*</span></p>
-                                <input type="text" placeholder="District">
+                                <select id="district" name="district" class="form-control" class="form-control">
+                                    <option value="<?php echo $result['QH']?>"><?php echo $result['TT'] ?></option>         
+                                    
+
+                         </select>
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
+                                <input type="text" name="address" value="<?php echo $result['address'] ?>" class="checkout__input__add">
                                 
                             </div>
                             <div class="row">
@@ -139,7 +195,7 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text" name="phone" value="<?php echo $result['emailCus'] ?>">
+                                        <input type="text" name="email" value="<?php echo $result['emailCus'] ?>">
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +221,7 @@
                            
                             ?>
                                     <li>  <?php 
-                                    // echo $result['productName']
+                                    
                                     echo $fm->textShorten($result['productName'],25) 
                                     ?>  <span><?php echo $result['price']?></span></li>
                                     <input type="hidden" name="quantity" value="<?php echo $result['quantity']?>"/>
@@ -209,18 +265,18 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div> -->
-                                <a href="bill.php"  type="submit" name="submit" style="margin-left: 70px; font-size: 30px;  padding: 0 10px;background:#7fad39; color: white; font-weight: 600;border-radius: 3px; ">Place Order</a>
+                                <input type="submit" name="submit_buy"  value="Place Order" style="margin-left: 70px; font-size: 30px;  padding: 0 10px;background:#7fad39; color: white; ">
+                                <!-- <a href="success.php"  type="submit" name="submit_buy" style="margin-left: 70px; font-size: 30px;  padding: 0 10px;background:#7fad39; color: white; ">Place Order</a> -->
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+         
     </section>
-    </form>
-    <!-- Checkout Section End -->
 
-    <!-- Footer Section Begin -->
+   
     <script>
 
                       $(document).ready(function(){
@@ -246,5 +302,5 @@
     
     include 'inc/footer.php';
     
-
+ob_end_flush();
 ?>

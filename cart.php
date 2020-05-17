@@ -124,7 +124,7 @@
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="img/background.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -297,7 +297,20 @@
                            
 
                         </ul>
+                        <?php 
+                            $qtt=Session::get("qtt");
+                            if($qtt!='0'){
+                         ?>
                         <a href="checkout.php" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <?php 
+                        }else{
+
+                         ?>
+                           <a href="index.php" class="primary-btn">PROCEED TO CHECKOUT</a>
+                           <?php 
+                              }
+                                                ?>
+                      
                     </div>
                     </form>
                 </div>

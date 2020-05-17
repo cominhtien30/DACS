@@ -36,10 +36,10 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="#">
-                                <div class="hero__search__categories">
+                                <!-- <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
-                                </div>
+                                </div> -->
                                 <input type="text" placeholder="What do yo u need?">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
@@ -54,13 +54,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
-                        <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
-                        </div>
+                    <div class="hero__item set-bg" data-setbg="img/banner/banner.jpg">
+                        
                     </div>
                 </div>
             </div>
@@ -69,7 +64,35 @@
     <!-- Hero Section End -->
 
     <!-- Categories Section Begin -->
-   
+    <section class="categories">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/1.png">
+                            <h5><a href="#">SHOES</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/cat-2.jpg">
+                            <h5><a href="#">CLOTHING</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/cat-3.jpg">
+                            <h5><a href="#">ACCESSORIES</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/cat-4.jpg">
+                            <h5><a href="#">SPORT</a></h5>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Categories Section End -->
 
     <!-- Featured Section Begin -->
@@ -80,74 +103,42 @@
                     <div class="section-title">
                         <h2>Featured Product</h2>
                     </div>
-                   <!--  <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
-                        </ul>
-                    </div> -->
+                    
                 </div>
             </div>
-            
             <div class="row featured__filter">
                 <?php 
-                        $Get_ProductFeathered=$pro->Get_ProductFeathered();
-                        if ($Get_ProductFeathered) {
-                            while ($data=mysqli_fetch_array($Get_ProductFeathered)) {
-                                # code...
-                        
+                $get_ProductbyType = $pro->Get_ProductFeathered();
+                if($get_ProductbyType){
+                    while($result =$get_ProductbyType->fetch_assoc()){
 
-                         ?>
+
+                
+             ?>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
-                        
-                        <div class="featured__item__pic set-bg" data-setbg="admin/uploads/<?php echo $data['image'] ?>">
+                        <div class="featured__item__pic set-bg" data-setbg="admin/uploads/<?php echo $result['image']?>">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="details.php?proname=<?php echo $data['productName'] ?>"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li><a href="details.php?proname=<?php echo $result['productName'] ?>"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="details.php?proname=<?php echo $data['productName'] ?>"><?php echo $data['productName'] ?></a></h6>
-                            <h5><?php echo $data['price'] ?></h5>
-                      
+                            <h6><a href="#"><?php echo $result['productName'] ?></a></h6>
+                            <h5><?php echo $result['price']." VNĐ" ?> </h5>
                         </div>
-
                     </div>
-                    
                 </div>
-                <?php 
-                            }
-                        }
-                     ?>
+                <?php  
+                }
+            }
+                ?>
+                
             </div>
-
         </div>
     </section>
-    <!-- Featured Section End -->
-
-    <!-- Banner Begin -->
-    <div class="banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="img/banner/banner-1.jpg" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="img/banner/banner-2.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Banner End -->
+   
    
 <?php
     
