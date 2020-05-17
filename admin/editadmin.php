@@ -61,19 +61,6 @@ include('includes/navbar.php');
                 <label>Repeat New Password</label>
                 <input type="password" name="newpassword" class="form-control" placeholder="Enter Repeat Password">
             </div>
-            <div class="form-group">
-              <label >Level</label>
-                <select name="level" class="form-control">
-                  <option value="><?php echo $result['level'] ?>"><?php echo $result['level'] ?></option>
-                  <?php if ($result['level']==0) {
-                      echo ' <option value="1">1</option>';
-                  }else{
-                      echo ' <option value="0">0</option>';
-                  } 
-                  ?>
-                  option
-                </select>
-            </div>
         
        <?php if (isset($update_admin)) {
                 echo $update_admin;

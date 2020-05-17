@@ -54,11 +54,20 @@
  <li class="nav-item">
   <a class="nav-link" href="listadmin.php">
     <i class="fas fa-fw fa-chart-area"></i>
-    <span>List Admin Profile</span></a>
+    <span>List Admin</span></a>
 </li>
 <?php
           }
-            ?>  
+            ?> 
+<li class="nav-item">
+  <?php   
+        $admin_user=session::get('admin_User');
+   ?>
+  <a class="nav-link" href="editadmin.php?username=<?php  echo $admin_user ?>">
+    <i class="fas fa-fw fa-cog"></i>
+    <span>Profile</span></a>
+</li>
+ 
 
 
 

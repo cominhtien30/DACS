@@ -125,7 +125,6 @@ include('includes/navbar.php');
             <th>Email </th>
             <th>Password</th>
             <th>Level</th>
-            <th>Edit</th>
             <th>Reset Password </th>
             <th>DELETE </th>
           </tr>
@@ -146,7 +145,6 @@ include('includes/navbar.php');
             <td> <?php echo $result['admin_Email']; ?></td>
             <td> *** </td>
             <td> <?php echo $result['level']; ?></td>
-            <td> <a href="editadmin.php?username=<?php echo $result['admin_User'] ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Edit</a></td>
             <td>
                 <form action="" method="post">
                     <input type="hidden" name="edit_user" value="<?php echo $result['admin_User']; ?>">

@@ -168,8 +168,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
             <th> Image </th>
             <th> Category </th>
             <th> Brand </th>
-            
             <th> Price </th>
+            <th> Size </th>
             <th> EDIT </th>
             <th> DELETE </th>
           </tr>
@@ -190,8 +190,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
             <td><img src="uploads/<?php echo $result['image']?>" width="70" ></td> 
             <td> <?php echo $result['catName']; ?></td>
             <td> <?php echo $result['brandName']; ?></td>
-          
-            <td><?php echo $result['price'] ?></td>
+           
+             <td><?php echo $result['price'] ?></td>
+              <td> <?php echo $result['size']; ?></td>
            
 
             <td>
