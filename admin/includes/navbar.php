@@ -8,6 +8,9 @@
                                     Session::destroy();
                                 }
                              ?>
+<?php   
+        $admin_user=session::get('admin_User');
+   ?>
    <!-- Sidebar -->
    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 <!-- Sidebar - Brand -->
@@ -59,15 +62,7 @@
 <?php
           }
             ?> 
-<li class="nav-item">
-  <?php   
-        $admin_user=session::get('admin_User');
-   ?>
-  <a class="nav-link" href="editadmin.php?username=<?php  echo $admin_user ?>">
-    <i class="fas fa-fw fa-cog"></i>
-    <span>Profile</span></a>
-</li>
- 
+
 
 
 
@@ -103,7 +98,7 @@
 <li class="nav-item">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
     <i class="fas fa-fw fa-folder"></i>
-    <span>Cong Cu</span>
+    <span>Manage</span>
   </a>
   <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
@@ -296,7 +291,8 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+
+                <a class="dropdown-item" href="editadmin.php?username=<?php  echo $admin_user ?>">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
