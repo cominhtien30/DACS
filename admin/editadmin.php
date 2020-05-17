@@ -64,9 +64,14 @@ include('includes/navbar.php');
             <div class="form-group">
               <label >Level</label>
                 <select name="level" class="form-control">
-                 
-                  <option><?php echo $result['level'] ?></option>
-
+                  <option value="><?php echo $result['level'] ?>"><?php echo $result['level'] ?></option>
+                  <?php if ($result['level']==0) {
+                      echo ' <option value="1">1</option>';
+                  }else{
+                      echo ' <option value="0">0</option>';
+                  } 
+                  ?>
+                  option
                 </select>
             </div>
         

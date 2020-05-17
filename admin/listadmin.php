@@ -71,7 +71,6 @@ include('includes/navbar.php');
                 <select name="level" class="form-control">
                   <option value= "0">Admin 1</option>
                   <option value= "1">Admin 2</option>
-
                 </select>
             </div>
         
