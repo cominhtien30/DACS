@@ -54,7 +54,7 @@
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #4CAF50;
+  background-color: #7FAD39;
   border: none;
   border-radius: 15px;
 }
@@ -63,7 +63,17 @@
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+
 }
+    input.styling {
+         background-color: #7FAD39;
+  border: none;
+  color: white;
+  padding: 7px 12px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+    }
 
 
 
@@ -169,7 +179,7 @@
                                             </div>
 
                                         </div>
-                                        <input type="submit" name="submitupdate" value="Update"/>
+                                        <input class="styling" type="submit" name="submitupdate" value="Update"/>
                                         </form>
                                     </td>
 
