@@ -1,174 +1,184 @@
 <?php ob_start();
-    include 'inc/header.php';
-
+  include 'inc/header.php';
+?>
+<?php
+  $login = Session::get('customer_login');
+  if($login == false){
+    header('Location:login.php');
+  }
 ?>
 <?php 
-     $login = Session::get('customer_login');
-    if($login == false){
-     header('Location:login.php');
-     }
+  $username=session::get('customer_user');
+  if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){       
+       $updateCus = $user->Update_Customer($_POST,$username);
+    }
+ ?>
+<style>
+    table{
+        border: none;
+    }
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 16px;
+  height: -10%;
+  border: none;
+}
 
-?>
-    <!-- Header Section End -->
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 20px;
+}
 
-    <!-- Hero Section Begin -->
-    
+#customers tr:nth-child(even){background-color: #f2f2f2;}
 
-    <section class="hero hero-normal">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All departments</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
+#customers tr:hover {background-color: #ddd;}
 
-    <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Profile</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Checkout</span>
-                        </div>
+#customers th {
+  padding-top: 20px;
+  padding-bottom: 22px;
+  text-align: left;
+  height: 30px;
+  background-color: #7FAD39;
+  color: white;
+}
+input[type=texts], select {
+  
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  height: 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+input[type=password], select {
+  
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  height: 30px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+</style>
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="img/background.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Profile</h2>
+                    <div class="breadcrumb__option">
+                        <a href="./index.html">Home</a>
+                        <span>Profile</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Breadcrumb Section End -->
-
-    <!-- Checkout Section Begin -->
-    <form action="" method="post">  
-    <section class="checkout spad">
-        <div class="container">
-            
-            <div class="main">
-    <div class="content">
-        <div class="content_top">
-            <div class="heading">
-            <h2>Profile</h3>
-            </div>
-            <div class="clear"></div>
-        </div>
-        <table class="table-hover" width="100%">
-           <?php
-            $username=session::get('customer_user');
-            $Get_User=$user->Get_User($username);
-            if ($Get_User) {
-                while ($data=mysqli_fetch_array($Get_User)) {
-                    # code...
-
-            ?>
-            <tr>
-                <td><p>Name </p></td>
-                <td>:</td>
-                <td><input type="text" name="name" readonly="" value="<?php echo $data['nameCus'] ?>"></td>
-               
-            </tr>
-            <tr>
-                <td><p>Số Điện Thoại  </p></td>
-                <td>:</td>
-                <td><input type="text" name="phone" readonly="" value="<?php echo $data['phone'] ?>"></td>
-                
-            </tr>
-            <tr>
-                <td><p>Email</p> </td>
-                <td>:</td>
-                <td><input type="text" name="email" readonly="" value="<?php echo $data['emailCus'] ?>"></td>
-                
-            </tr>  
-            <tr>
-                <td><p>City</p></td>
-                <td>:</td>
-                <td><input type="text" readonly="" value="<?php echo $data['HH'] ?>">
-                </td>
-                
-            </tr>   
-            <tr>
-                <td><p>District</p></td>
-                <td>:</td>
-                <td class=""><input type="text" readonly="" value="<?php echo $data['TT'] ?>"></td>
-                
-            </tr>        
-            <tr>
-                <td><p>Địa Chỉ</p></td>
-                <td>:</td>
-                <td><input type="text" readonly="" name="address" value="<?php echo $data['address'] ?>"></td>
-            </tr>   
-            <?php 
-                    }
-            }
-             ?>
-            
-
-        </table>
-            <a href="editprofile.php" style="background: #7fad39; color: white; font-size: 17px; margin-left: 200px; padding: 2px 15px; font-weight: 700; border-radius: 1px;">Edit Profile</a>
-    
-        
         </div>
     </div>
- </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Checkout Section Begin -->
+
+<section class="checkout spad">
+    <div class="container">
+        
+        <div class="checkout__form">
+            <h4>YOUR PROFILE</h4>
+            <form action="" method="post">
+            <div class="row">
+                <table  id="customers" width="100%">
+                   
+                    
+                     <?php
+                        
+                        $Get_User=$user->Get_User($username);
+                        if ($Get_User) {
+                        while ($result=mysqli_fetch_array($Get_User)) {
+                        
+                        ?>
+                    <tr>
+                        <td>Username </td>
+                        <td>:</td>
+                        <td><input  type="texts" name="" disabled value="<?php echo $username; ?>"></td>
+                        
+                       
+                     
+                        
+                        
+                    </tr>
+                    <tr>
+                        <td>Name </td>
+                        <td>:</td>
+                        <td>
+                          <input type="texts" name="name" value="<?php echo $result['nameCus']; ?>">
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>Email </td>
+                        <td>:</td>
+                        <td><input type="texts" name="phone" value="<?php echo $result['emailCus']; ?>"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Phone </td>
+                        <td>:</td>
+                        <td><input type="texts" name="email" value="<?php echo $result['phone']; ?>"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Address </td>
+                        <td>:</td>
+                        <td><input type="texts" name="address" value="<?php echo $result['address']; ?>"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Password </td>
+                        <td>:</td>
+                        <td><input type="password" name="password" value=""></td>
+                        
+                    </tr>
+                   <?php
+                    }
+                    }
+                    ?>
+                </table>
+               
+                
+            </div>
+
+          </form> 
+          
         </div>
-    </section>
-    </form>
-    <!-- Checkout Section End -->
-    <!-- Footer Section Begin -->
-    <style type="text/css" media="screen">
-        input{
-            width: 50%;
-            text-align: center;
-        }   
-    </style>
-   <?php
-    
-    include 'inc/footer.php';
-    
+        <form action="" method="post">
+          <center><button type="submit" class="site-btn" name="submit">UPDATE</button></center>
+        </form>
+                    </div>
+</section>
+
+
+                
+<style type="text/css" media="screen">
+input{
+width: 50%;
+text-align: center;
+}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<?php
+
+include 'inc/footer.php';
+
 ob_end_flush();
 ?>

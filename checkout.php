@@ -12,16 +12,13 @@ $a=Session::get('qtt');
 if($a == '0')
 header('Location:index.php');
 ?>
-
 <?php
-
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_buy'])){
 $buyer= Session::get('customer_user');
 $insertOrder = $ct->insert_Order($_POST,$buyer);
 $MaxId = $ct->get_Max_Id();
 if($MaxId){
 while ($result = $MaxId->fetch_assoc()){
-
 $insertOrderDetails = $ct->insert_OrderDetail($result['order_Id']);
 }
 }
@@ -33,6 +30,8 @@ header('Location:success.php');
 // }
 ?>
 
+
+</style>
 <section class="hero hero-normal">
     <div class="container">
         <div class="row">
@@ -109,7 +108,7 @@ header('Location:success.php');
             <h4>Billing Details</h4>
             <form action="" method="post">
                 <div class="row">
-                    <div class="col-lg-8 csol-md-6">
+                    <div class="col-lg-8 col-md-6">
                         <?php
                         $userr= Session::get('customer_user');
                         $show_Cus = $user->Get_User($userr);
@@ -140,31 +139,15 @@ header('Location:success.php');
                         
                         <div class="checkout__input">
                             <p>Town/City<span>*</span></p>
-                            <select  id="city" name="city" >
-                                <?php
-                                $citylist = $city->Show_City();
-                                if($citylist){
-                                while ($resultCity = $citylist->fetch_assoc()){
-                                ?>
-                                <option
-                                    <?php
-                                    if($resultCity['matp'] == $result['TP']){
-                                    echo 'selected';
-                                    }
-                                    ?>
-                                value="<?php echo $resultCity['matp']?>" data-name="<?= $result['matp'] ?>"><?php echo $resultCity['name'] ?></option>
-                                <?php
-                                }
-                                }
-                                ?>
-                            </select>
+                            <input type="text" name="name" value="<?php echo $result['city'] ?>">
                         </div>
                         <div class="checkout__input">
                             <p>District<span>*</span></p>
-                            <select id="district" name="district" class="form-control" class="form-control">
-                                <option value="<?php echo $result['QH']?>"><?php echo $result['TT'] ?></option>
-                                
-                            </select>
+                            
+                            
+                            <input type="text" name="name" value="<?php echo $result['district'] ?>">
+                            
+                            
                         </div>
                         <div class="checkout__input">
                             <p>Address<span>*</span></p>
@@ -263,12 +246,13 @@ header('Location:success.php');
     $(document).ready(function(){
     $('#city').change(function(){
     var matp = $('#city option:selected').val();
+    // alter(matp);
     data = {
     city:1,
     matp:matp
     };
     $.ajax({
-    url:"getdistrict.php",
+    url:"cityy.php",
     type:"POST",
     data:data
     }).done(function(result){
@@ -278,6 +262,7 @@ header('Location:success.php');
     })
     });
     </script>
+    
     <?php
     
     include 'inc/footer.php';

@@ -7,7 +7,8 @@ include('includes/navbar.php');
 <?php include '../classes/admin.php'?>
 <?php 
   $admin = new admin();
-  if($_SERVER['REQUEST_METHOD'] == 'POST'  && isset($_POST['registerbtn']) ){
+  $check = Session::get('level');
+  if($_SERVER['REQUEST_METHOD'] == 'POST'  && isset($_POST['registerbtn'])  ){
 
        
 
@@ -36,7 +37,7 @@ include('includes/navbar.php');
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Admin Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Admin </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

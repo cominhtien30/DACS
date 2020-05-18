@@ -35,15 +35,15 @@
 
 			$name = mysqli_real_escape_string($this->db->link, $data['name']);
 			$username = mysqli_real_escape_string($this->db->link, $data['username']);
-			$city = mysqli_real_escape_string($this->db->link, $data['city']);
+			
 			$address = mysqli_real_escape_string($this->db->link, $data['address']);
 			$phone = mysqli_real_escape_string($this->db->link, $data['phone']);
 			$password = mysqli_real_escape_string($this->db->link, md5($data['password']));
-			$district = mysqli_real_escape_string($this->db->link, $data['district']);
+			
 			$email = mysqli_real_escape_string($this->db->link, $data['email']);
 			
 
-			if($name == "" || $username == "" || $city == "" || $address == "" || $phone == "" || $password == ""|| $district == "" || $email == ""){
+			if($name == "" || $username == ""  || $address == "" || $phone == "" || $password == "" || $email == ""){
 				$alert = "<span>Vui lòng không để trống thông tin</span>"; 
 				return $alert;
 			}else{
@@ -53,7 +53,7 @@
 					$alert = "<span>Người dùng đã tồn tại</span>";
 					return $alert;
 				}else{
-					$query = "INSERT INTO tbl_customer( username ,  password ,  nameCus ,  emailCus ,  city ,  district ,  address ,  phone ) VALUES ('$username','$password','$name','$email','$city','$district','$address','$phone')";
+					$query = "INSERT INTO tbl_customer( username ,  password ,  nameCus ,  emailCus ,    address ,  phone ) VALUES ('$username','$password','$name','$email','$address','$phone')";
 					$result = $this->db->insert($query);
 					if($result){
 						$alert = "<span>Đăng ký khách hàng thành công</span>";
@@ -91,27 +91,25 @@
 		}
 
 		public function Get_User($username){
-			$query = "SELECT a.username,a.nameCus,a.emailCus,a.address,a.phone, b.name as 'HH',c.name AS 'TT', b.matp as 'TP', c.maqh as 'QH'
-					  FROM tbl_customer a, tbl_city b, tbl_district c
-					  WHERE a.city=b.matp AND a.district=c.maqh AND a.username = '$username'";
+			$query = "SELECT *
+					  FROM tbl_customer 
+					  WHERE username = '$username'";
 			$result_check = $this->db->select($query);
 			return $result_check;
 		}
 
 		public function Update_Customer($data,$userr){
 			$name = mysqli_real_escape_string($this->db->link, $data['name']);
-			$city = mysqli_real_escape_string($this->db->link, $data['city']);
 			$address = mysqli_real_escape_string($this->db->link, $data['address']);
 			$phone = mysqli_real_escape_string($this->db->link, $data['phone']);
-			$district = mysqli_real_escape_string($this->db->link, $data['district']);
 			$email = mysqli_real_escape_string($this->db->link, $data['email']);
 			
 
-			if($name == ""  || $city == "" || $address == "" || $phone == "" || $district == "" || $email == ""){
+			if($name == ""   || $address == "" || $phone == ""  || $email == ""){
 				$alert = "<span>Vui lòng không để trống thông tin</span>"; 
 				return $alert;
 			}else{
-					$query = "UPDATE tbl_customer SET nameCus='$name',emailCus='$email',city='$city',district='$district',address='$address',phone='$phone' WHERE username = '$userr'";
+					$query = "UPDATE tbl_customer SET nameCus='$name',emailCus='$email',address='$address',phone='$phone' WHERE username = '$userr'";
 					$result = $this->db->update($query);
 					if($result){
 						$alert = "<span>Cập nhật thông tin thành công</span>";
