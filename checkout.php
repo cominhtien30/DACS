@@ -15,7 +15,7 @@ header('Location:index.php');
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_buy'])){
 $buyer= Session::get('customer_user');
-$insertOrder = $ct->insert_Order($_POST,$buyer);
+$insertOrder = $bill->insert_Order($_POST,$buyer);
 $MaxId = $ct->get_Max_Id();
 if($MaxId){
 while ($result = $MaxId->fetch_assoc()){
@@ -136,19 +136,6 @@ header('Location:success.php');
                         </div>
                         
                         
-                        
-                        <div class="checkout__input">
-                            <p>Town/City<span>*</span></p>
-                            <input type="text" name="name" value="<?php echo $result['city'] ?>">
-                        </div>
-                        <div class="checkout__input">
-                            <p>District<span>*</span></p>
-                            
-                            
-                            <input type="text" name="name" value="<?php echo $result['district'] ?>">
-                            
-                            
-                        </div>
                         <div class="checkout__input">
                             <p>Address<span>*</span></p>
                             <input type="text" name="address" value="<?php echo $result['address'] ?>" class="checkout__input__add">

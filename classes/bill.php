@@ -22,6 +22,30 @@
 			$this->db = new Database();
 			$this->fm = new Format();
 		}
+				public function insert_Order($data,$buyerr){
+			
+			$name = mysqli_real_escape_string($this->db->link, $data['name']);	
+			$address = mysqli_real_escape_string($this->db->link, $data['address']);
+			$phone = mysqli_real_escape_string($this->db->link, $data['phone']);
+			$email = mysqli_real_escape_string($this->db->link, $data['email']);
+			$total = 0;
+			$session_id = session_id();
+			$query = "SELECT * FROM tbl_cart WHERE ssId = '$session_id'";
+			$get_cart = $this->db->select($query);
+			if($get_cart){
+				while ($result = $get_cart->fetch_assoc()) {
+					$quantity = $result['quantity'];
+					$price = $result['price'];
+					$totalprice = $quantity * $price;
+					$total +=$totalprice;
+				}
+
+			}
+			
+			$query_order = "INSERT INTO tbl_order ( buyer, receiver, phone, email, city, district, address, totalprice) VALUES ('$buyerr','$name','$phone','$email','$city','$district','$address','$total')";
+			$insertOder = $this->db->insert($query_order);
+			}
+		
 		
 		public function get_Bill_by_Customer($cus){
 
