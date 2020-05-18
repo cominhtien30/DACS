@@ -178,7 +178,7 @@
                                         <?php echo $result['price']." VNĐ"?> 
                                     </td>
                                     <td class="shoping__cart__price">
-                                        M
+                                         <?php echo $result['size']?> 
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <form action="" method="post">

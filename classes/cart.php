@@ -171,6 +171,14 @@
 				return $result;
 			}
 		}
+		public function get_id(){
+			
+			$query = "SELECT * FROM tbl_discount ";
+			$result = $this->db->select($query);
+			if($result){
+				return $result;
+			}
+		}
 		public function insert_Discount($code,$discount){
 
 			$code = $this->fm->validation($code);

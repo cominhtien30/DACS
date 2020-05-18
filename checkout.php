@@ -1,247 +1,230 @@
 <?php ob_start();
-    include 'inc/header.php';
-
+include 'inc/header.php';
 ?>
-<?php 
-     $login = Session::get('customer_login');
-    if($login == false){
-     header('Location:login.php');
-     }
-
+<?php
+$login = Session::get('customer_login');
+if($login == false){
+header('Location:login.php');
+}
 ?>
-<?php 
-    $a=Session::get('qtt');
-    if($a == '0')
-        header('Location:index.php');
+<?php
+$a=Session::get('qtt');
+if($a == '0')
+header('Location:index.php');
+?>
 
- ?>
- 
-<?php 
-    
-    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_buy'])){
+<?php
 
-       $buyer= Session::get('customer_user');
-        $insertOrder = $ct->insert_Order($_POST,$buyer);
-        $MaxId = $ct->get_Max_Id();
-        if($MaxId){
-            while ($result = $MaxId->fetch_assoc()){
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_buy'])){
+$buyer= Session::get('customer_user');
+$insertOrder = $ct->insert_Order($_POST,$buyer);
+$MaxId = $ct->get_Max_Id();
+if($MaxId){
+while ($result = $MaxId->fetch_assoc()){
+
+$insertOrderDetails = $ct->insert_OrderDetail($result['order_Id']);
+}
+}
+$destroyCart = $ct->Del_cart_by_Session();
+header('Location:success.php');
+}
+// else{
+//   echo "<script>window.location = '404.php'</script>";
+// }
+?>
+
+<section class="hero hero-normal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>All departments</span>
+                    </div>
+                    <ul>
+                        <li><a href="#">Fresh Meat</a></li>
+                        <li><a href="#">Vegetables</a></li>
+                        <li><a href="#">Fruit & Nut Gifts</a></li>
+                        <li><a href="#">Fresh Berries</a></li>
+                        <li><a href="#">Ocean Foods</a></li>
+                        <li><a href="#">Butter & Eggs</a></li>
+                        <li><a href="#">Fastfood</a></li>
+                        <li><a href="#">Fresh Onion</a></li>
+                        <li><a href="#">Papayaya & Crisps</a></li>
+                        <li><a href="#">Oatmeal</a></li>
+                        <li><a href="#">Fresh Bananas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="#">
+                            <div class="hero__search__categories">
+                                All Categories
+                                <span class="arrow_carrot-down"></span>
+                            </div>
+                            <input type="text" placeholder="What do yo u need?">
+                            <button type="submit" class="site-btn">SEARCH</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>+65 11.188.888</h5>
+                            <span>support 24/7 time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="img/background.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Checkout</h2>
+                    <div class="breadcrumb__option">
+                        <a href="./index.html">Home</a>
+                        <span>Checkout</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+    <div class="container">
         
-        $insertOrderDetails = $ct->insert_OrderDetail($result['order_Id']);
-            }
-        }
-        $destroyCart = $ct->Del_cart_by_Session();
-        header('Location:success.php');
-
-    }
-    // else{
-    //   echo "<script>window.location = '404.php'</script>";
-    // }
-?>
-    
-
-    <section class="hero hero-normal">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All departments</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
+        <div class="checkout__form">
+            <h4>Billing Details</h4>
+            <form action="" method="post">
+                <div class="row">
+                    <div class="col-lg-8 csol-md-6">
+                        <?php
+                        $userr= Session::get('customer_user');
+                        $show_Cus = $user->Get_User($userr);
+                        if($show_Cus){
+                        while($result =$show_Cus->fetch_assoc()){
+                        
+                        ?>
+                        <!-- <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Fist Name<span>*</span></p>
+                                    <input type="text">
                                 </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
                             </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
-
-    <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/background.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Checkout</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Checkout</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Breadcrumb Section End -->
-
-    <!-- Checkout Section Begin -->
-       <section class="checkout spad">
-        <div class="container">
-            
-            <div class="checkout__form">
-                <h4>Billing Details</h4>
-                <form action="" method="post">
-                    <div class="row">
-                        <div class="col-lg-8 csol-md-6">
-                           <?php 
-                                $userr= Session::get('customer_user');
-                                $show_Cus = $user->Get_User($userr);
-                                if($show_Cus){
-                                    while($result =$show_Cus->fetch_assoc()){
-                
-                                ?>
-                            <!-- <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Fist Name<span>*</span></p>
-                                        <input type="text">
-                                    </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Last Name<span>*</span></p>
+                                    <input type="text">
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Last Name<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            <div class="checkout__input">
-                                <p>Name<span>*</span></p>
-                                <input type="text" name="name" value="<?php echo $result['nameCus'] ?>">
                             </div>
-                            
-                            
-                            
-                            <div class="checkout__input">
-                                <p>Town/City<span>*</span></p>
-                                <select  id="city" name="city" >
-                        <?php 
-                            $citylist = $city->Show_City();
-                            if($citylist){
+                        </div> -->
+                        <div class="checkout__input">
+                            <p>Name<span>*</span></p>
+                            <input type="text" name="name" value="<?php echo $result['nameCus'] ?>">
+                        </div>
+                        
+                        
+                        
+                        <div class="checkout__input">
+                            <p>Town/City<span>*</span></p>
+                            <select  id="city" name="city" >
+                                <?php
+                                $citylist = $city->Show_City();
+                                if($citylist){
                                 while ($resultCity = $citylist->fetch_assoc()){
-
-
-                         ?>
-                        <option
-                            <?php 
-                                if($resultCity['matp'] == $result['TP']){
+                                ?>
+                                <option
+                                    <?php
+                                    if($resultCity['matp'] == $result['TP']){
                                     echo 'selected';
+                                    }
+                                    ?>
+                                value="<?php echo $resultCity['matp']?>" data-name="<?= $result['matp'] ?>"><?php echo $resultCity['name'] ?></option>
+                                <?php
                                 }
-                             ?>
-                         value="<?php echo $resultCity['matp']?>" data-name="<?= $result['matp'] ?>"><?php echo $resultCity['name'] ?></option>
-                        <?php 
-
-                           }
-                            }
-
-                     ?>
-                        </select>
-                            </div>
-                            <div class="checkout__input">
-                                <p>District<span>*</span></p>
-                                <select id="district" name="district" class="form-control" class="form-control">
-                                    <option value="<?php echo $result['QH']?>"><?php echo $result['TT'] ?></option>         
-                                    
-
-                         </select>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Address<span>*</span></p>
-                                <input type="text" name="address" value="<?php echo $result['address'] ?>" class="checkout__input__add">
-                                
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Phone<span>*</span></p>
-                                        <input type="text" name="phone" value="<?php echo $result['phone'] ?>">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Email<span>*</span></p>
-                                        <input type="text" name="email" value="<?php echo $result['emailCus'] ?>">
-                                    </div>
-                                </div>
-                            </div>
-                           
+                                }
+                                ?>
+                            </select>
                         </div>
-                        <?php  
-                }
-            }
-                ?>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="checkout__order">
-                                <h4>Your Order</h4>
-                                <div class="checkout__order__products">Products <span>Total</span></div>
-
-                                <ul>
-                                    <?php 
+                        <div class="checkout__input">
+                            <p>District<span>*</span></p>
+                            <select id="district" name="district" class="form-control" class="form-control">
+                                <option value="<?php echo $result['QH']?>"><?php echo $result['TT'] ?></option>
+                                
+                            </select>
+                        </div>
+                        <div class="checkout__input">
+                            <p>Address<span>*</span></p>
+                            <input type="text" name="address" value="<?php echo $result['address'] ?>" class="checkout__input__add">
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Phone<span>*</span></p>
+                                    <input type="text" name="phone" value="<?php echo $result['phone'] ?>">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Email<span>*</span></p>
+                                    <input type="text" name="email" value="<?php echo $result['emailCus'] ?>">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <?php
+                    }
+                    }
+                    ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="checkout__order">
+                            <h4>Your Order</h4>
+                            <div class="checkout__order__products">Products <span>Total</span></div>
+                            <ul>
+                                <?php
                                 
                                 $get_cat = $ct->get_Cart();
                                 if($get_cat){
+                                
+                                while ($result = $get_cat->fetch_assoc()) {
+                                
+                                
+                                ?>
+                                <li>  <?php
                                     
-                                    while ($result = $get_cat->fetch_assoc()) {
-                                            
-                           
-                            ?>
-                                    <li>  <?php 
-                                    
-                                    echo $fm->textShorten($result['productName'],25) 
+                                    echo $fm->textShorten($result['productName'],25)
                                     ?>  <span><?php echo $result['price']?></span></li>
                                     <input type="hidden" name="quantity" value="<?php echo $result['quantity']?>"/>
-
-                                    <?php 
+                                    <?php
                                     }
-
                                     }
-                            ?>
+                                    ?>
                                 </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span><?php  
-                                        $qtt = '0';
-                                        $qtt=Session::get("total");
-                                        echo $qtt ;
-                                    ?></span></div>
-                                <div class="checkout__order__total">Total <span><?php  
-                                        $qtt = '0';
-                                        $qtt=Session::get("total");
-                                        echo $qtt ;
-                                    ?></span></div>
+                                <div class="checkout__order__subtotal">Subtotal <span><?php
+                                    $qtt = '0';
+                                    $qtt=Session::get("total");
+                                    echo $qtt ;
+                                ?></span></div>
+                                <div class="checkout__order__total">Total <span><?php
+                                    $qtt = '0';
+                                    $qtt=Session::get("total");
+                                    echo $qtt ;
+                                ?></span></div>
                                 <!-- <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
@@ -250,7 +233,7 @@
                                     </label>
                                 </div>
                                 <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua.</p>
+                                ut labore et dolore magna aliqua.</p>
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
                                         Check Payment
@@ -273,34 +256,31 @@
                 </form>
             </div>
         </div>
-         
+        
     </section>
-
-   
+    
     <script>
-
-                      $(document).ready(function(){
-                         $('#city').change(function(){
-                            var matp = $('#city option:selected').val();
-                            data = {
-                                city:1,
-                                matp:matp
-                            };
-                            $.ajax({
-                                url:"getdistrict.php",
-                                type:"POST",
-                                 data:data
-                        }).done(function(result){
-                         $('#district').html(result);
-                
-                        })
-                    })
-
-                });
-                    </script>
-   <?php
+    $(document).ready(function(){
+    $('#city').change(function(){
+    var matp = $('#city option:selected').val();
+    data = {
+    city:1,
+    matp:matp
+    };
+    $.ajax({
+    url:"getdistrict.php",
+    type:"POST",
+    data:data
+    }).done(function(result){
+    $('#district').html(result);
+    
+    })
+    })
+    });
+    </script>
+    <?php
     
     include 'inc/footer.php';
     
-ob_end_flush();
-?>
+    ob_end_flush();
+    ?>
