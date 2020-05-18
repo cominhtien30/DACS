@@ -10,7 +10,7 @@
 <?php 
   $username=session::get('customer_user');
   if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){       
-       $updateCus = $user->Update_Customer($_POST,$username);
+       $updateCus=$user->Update_Customer($_POST,$username);
     }
  ?>
 <style>
@@ -126,13 +126,13 @@ input[type=password], select {
                     <tr>
                         <td>Email </td>
                         <td>:</td>
-                        <td><input type="texts" name="phone" value="<?php echo $result['emailCus']; ?>"></td>
+                        <td><input type="texts" name="email" value="<?php echo $result['emailCus']; ?>"></td>
                         
                     </tr>
                     <tr>
                         <td>Phone </td>
                         <td>:</td>
-                        <td><input type="texts" name="email" value="<?php echo $result['phone']; ?>"></td>
+                        <td><input type="texts" name="phone" value="<?php echo $result['phone']; ?>"></td>
                         
                     </tr>
                     <tr>
@@ -156,12 +156,15 @@ input[type=password], select {
                 
             </div>
 
-          </form> 
+          
           
         </div>
-        <form action="" method="post">
+        
           <center><button type="submit" class="site-btn" name="submit">UPDATE</button></center>
-        </form>
+      </form> 
+      <p><?php if (isset($updateCus)) {
+            echo $updateCus;
+      } ?></p>
                     </div>
 </section>
 

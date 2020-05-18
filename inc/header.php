@@ -13,7 +13,7 @@
     $brand = new brand();
     $pro=new product();
     $city=new city();
-    $user=new user();
+    $user=new User();
     $bill=new bill();
 ?>
 <?php 

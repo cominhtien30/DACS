@@ -103,25 +103,35 @@
 			$address = mysqli_real_escape_string($this->db->link, $data['address']);
 			$phone = mysqli_real_escape_string($this->db->link, $data['phone']);
 			$email = mysqli_real_escape_string($this->db->link, $data['email']);
-			
-
+			$password= mysqli_real_escape_string($this->db->link, $data['password']);
 			if($name == ""   || $address == "" || $phone == ""  || $email == ""){
 				$alert = "<span>Vui lòng không để trống thông tin</span>"; 
 				return $alert;
 			}else{
+				if ($password=="") {
 					$query = "UPDATE tbl_customer SET nameCus='$name',emailCus='$email',address='$address',phone='$phone' WHERE username = '$userr'";
 					$result = $this->db->update($query);
+					
+					return $tien;
 					if($result){
-						$alert = "<span>Cập nhật thông tin thành công</span>";
+						$alert = '<span class="text-success" >Cập nhật thông tin thành công</span>';
 						return $alert;
-					}
-					else{
-						$alert = "<span>Lỗi. Cập nhật thông tin không thành công</span>";
+					}else{
+						$alert = '<span class="text-danger">Lỗi. Cập nhật thông tin không thành công</span>';
 						return $alert;	
 					}
-
+				}else{
+					$query = "UPDATE tbl_customer SET nameCus='$name',emailCus='$email',address='$address',phone='$phone',password=md5('$password') WHERE username = '$userr'";
+					$result = $this->db->update($query);
+					if($result){
+						$alert = '<span class="text-success" >Cập nhật thông tin thành công</span>';						return $alert;
+					}
+					else{
+						$alert = '<span class="text-danger">Lỗi. Cập nhật thông tin không thành công</span>';
+						return $alert;	
+					}
+				}
 			}
-
 		}
 		
 
