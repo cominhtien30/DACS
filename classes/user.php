@@ -111,6 +111,8 @@
 				if ($password=="") {
 					$query = "UPDATE tbl_customer SET nameCus='$name',emailCus='$email',address='$address',phone='$phone' WHERE username = '$userr'";
 					$result = $this->db->update($query);
+					
+					return $tien;
 					if($result){
 						$alert = '<span class="text-success" >Cập nhật thông tin thành công</span>';
 						return $alert;
