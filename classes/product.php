@@ -202,5 +202,10 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
+		public function Show_ProductByBrand($id){
+			$query = "SELECT * FROM tbl_product A, tbl_category B, tbl_brand C WHERE A.catId=B.catId AND A.brandId=C.brandId AND C.brandId ='$id' GROUP BY A.productName ORDER BY A.productName DESC";
+			$result = $this->db->select($query);
+			return $result;
+		}
 	}
  ?>

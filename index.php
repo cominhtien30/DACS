@@ -23,7 +23,7 @@
                     ?>
                         <ul>
 
-                            <li><a href="#"><?php echo $result['brandName']; ?></a></li>
+                            <li><a href="productbrand.php?id=<?php echo $result['brandId'] ?>"><?php echo $result['brandName']; ?></a></li>
                             
                         </ul>
                         <?php
@@ -64,35 +64,7 @@
     <!-- Hero Section End -->
 
     <!-- Categories Section Begin -->
-    <section class="categories">
-        <div class="container">
-            <div class="row">
-                <div class="categories__slider owl-carousel">
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/1.png">
-                            <h5><a href="#">SHOES</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-2.jpg">
-                            <h5><a href="#">CLOTHING</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-3.jpg">
-                            <h5><a href="#">ACCESSORIES</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-4.jpg">
-                            <h5><a href="#">SPORT</a></h5>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <!-- Categories Section End -->
 
     <!-- Featured Section Begin -->

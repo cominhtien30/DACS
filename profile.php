@@ -20,20 +20,23 @@
 #customers {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 60%;
   font-size: 16px;
   height: -10%;
-  border: none;
+  border-collapse: collapse;
+
+  
 }
 
 #customers td, #customers th {
   border: 1px solid #ddd;
-  padding: 20px;
+  padding: 10px;
+  border: none;
 }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:nth-child(even){}
 
-#customers tr:hover {background-color: #ddd;}
+
 
 #customers th {
   padding-top: 20px;
@@ -42,6 +45,7 @@
   height: 30px;
   background-color: #7FAD39;
   color: white;
+  border: none;
 }
 input[type=texts], select {
   
@@ -66,6 +70,10 @@ input[type=password], select {
   border-radius: 4px;
   box-sizing: border-box;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#td1{
+  font-weight: bold;
+  font-size: 20px;
 }
 </style>
 
@@ -94,8 +102,10 @@ input[type=password], select {
         <div class="checkout__form">
             <h4>YOUR PROFILE</h4>
             <form action="" method="post">
-            <div class="row">
-                <table  id="customers" width="100%">
+            <div class="srow">
+              
+                <center>
+                  <table  id="customers" >
                    
                     
                      <?php
@@ -106,7 +116,7 @@ input[type=password], select {
                         
                         ?>
                     <tr>
-                        <td>Username </td>
+                        <td id="td1">Username </td>
                         <td>:</td>
                         <td><input  type="texts" name="" disabled value="<?php echo $username; ?>"></td>
                         
@@ -116,7 +126,7 @@ input[type=password], select {
                         
                     </tr>
                     <tr>
-                        <td>Name </td>
+                        <td id="td1">Name </td>
                         <td>:</td>
                         <td>
                           <input type="texts" name="name" value="<?php echo $result['nameCus']; ?>">
@@ -124,25 +134,25 @@ input[type=password], select {
 
                     </tr>
                     <tr>
-                        <td>Email </td>
+                        <td id="td1">Email </td>
                         <td>:</td>
                         <td><input type="texts" name="email" value="<?php echo $result['emailCus']; ?>"></td>
                         
                     </tr>
                     <tr>
-                        <td>Phone </td>
+                        <td id="td1">Phone </td>
                         <td>:</td>
                         <td><input type="texts" name="phone" value="<?php echo $result['phone']; ?>"></td>
                         
                     </tr>
                     <tr>
-                        <td>Address </td>
+                        <td id="td1">Address </td>
                         <td>:</td>
                         <td><input type="texts" name="address" value="<?php echo $result['address']; ?>"></td>
                         
                     </tr>
                     <tr>
-                        <td>Password </td>
+                        <td id="td1">Password </td>
                         <td>:</td>
                         <td><input type="password" name="password" value=""></td>
                         
@@ -151,10 +161,8 @@ input[type=password], select {
                     }
                     }
                     ?>
-                </table>
-               
-                
-            </div>
+                </table></center>
+             
 
           
           
