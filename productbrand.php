@@ -2,6 +2,13 @@
     include 'inc/header.php';
 
 ?>
+<?php 
+if(!isset($_GET['id']) || $_GET['id']==NULL){
+        echo "<script>window.location = '404.php'</script>";
+        
+    }else{
+        $id = $_GET['id'];
+    } ?>
     <section class="hero hero-normal">
         <div class="container">
             <div class="row">
@@ -45,7 +52,7 @@
                         <h2>BUG SHOP</h2>
                         <div class="breadcrumb__option">
                             <a href="./index.html">Home</a>
-                            <span>All Product</span>
+                            <span> Product</span>
                         </div>
                     </div>
                 </div>
@@ -72,7 +79,7 @@
                     ?>
                         <ul>
 
-                            <li><a href="#"><?php echo $result['brandName']; ?></a></li>
+                            <li><a href="productbrand.php?id=<?php echo $result['brandId'] ?>"><?php echo $result['brandName']; ?></a></li>
                             
                         </ul>
                         <?php
@@ -169,7 +176,21 @@
                 <div class="col-lg-9 col-md-7">
                    
                         <div class="section-title product__discount__title">
-                            <h2>ALL PRODUCT</h2>
+                            <?php  
+                        
+                    
+                        $brand = $brand->getnamebyId($id);
+                        if($brand){
+                        
+                            while ($result = $brand->fetch_assoc()) {
+                            
+                        
+                 ?>
+                            <h2><?php echo $result['brandName'] ?>'s Product</h2>
+                              <?php 
+                    }
+                }
+             ?>
                             <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
@@ -198,7 +219,7 @@
                             <?php  
                         
                     
-                        $prodList = $pro->Show_Product();
+                        $prodList = $pro->Show_ProductByBrand($id);
                         if($prodList){
                         
                             while ($result = $prodList->fetch_assoc()) {

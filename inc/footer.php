@@ -7,9 +7,9 @@
                             <a href="./index.php"><img src="img/footerlogo.jpg" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 475A DIEN BIEN PHU, P25</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: contact@bugshop.com</li>
+                            <li>  Address: 475A DIEN BIEN PHU, P25</li>
+                            <li>  Phone: +65 11.188.888</li>
+                            <li>  Email: contact@bugshop.com</li>
                         </ul>
                     </div>
                 </div>

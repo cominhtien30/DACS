@@ -121,14 +121,8 @@ $buyer= Session::get('customer_user');
                         <ul>
                             <li class="active"><a href="./index.php">Home</a></li>
                             <li><a href="./product.php">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.php">Shop Details</a></li>
-                                    <li><a href="./cart.php">Shoping Cart</a></li>
-                                    <li><a href="./checkout.php">Check Out</a></li>
-                                    <li><a href="./blog-details.php">Blog Details</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="./cart.php">Cart</a></li>
+                            
                             <?php 
                                  $login = Session::get('customer_login');
                                  if($login == false){
@@ -136,7 +130,7 @@ $buyer= Session::get('customer_user');
                                   }else
                                   {
                                      echo  '<li><a href="./profile.php">Profile</a></li>';
-                                     echo  '<li><a href="./bill.php">My Bill</a></li>';
+                                     echo  '<li><a href="./bill.php">Your Bill</a></li>';
                                    }
                             ?>                         
                         </ul>

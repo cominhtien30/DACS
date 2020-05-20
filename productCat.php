@@ -45,7 +45,7 @@
                         <h2>BUG SHOP</h2>
                         <div class="breadcrumb__option">
                             <a href="./index.html">Home</a>
-                            <span>All Product</span>
+                            <span> Product</span>
                         </div>
                     </div>
                 </div>
@@ -183,7 +183,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    
+                                    <h6><span>16</span> Products found</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
