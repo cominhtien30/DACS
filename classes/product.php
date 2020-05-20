@@ -67,22 +67,20 @@
 		}
 
 
+
 		public function Show_Product(){
-			$query = "SELECT A.productName,A.image,A.size, C.brandName,B.catName,A.price,A.type,A.description FROM tbl_product A, tbl_category B, tbl_brand C WHERE A.catId=B.catId AND A.brandId=C.brandId GROUP BY A.productName, A.description, A.price  ORDER BY A.productName DESC";
+			$query = "SELECT A.productName,A.image,A.size, C.brandName,B.catName,A.price,A.type,A.description FROM tbl_product A, tbl_category B, tbl_brand C WHERE A.catId=B.catId AND A.brandId=C.brandId GROUP BY A.productName, A.description, A.price  ORDER BY A.productName  DESC";
 			$result = $this->db->select($query);
 			return $result;
 		}
 		
 
 
-		public function update_product($data,$files, $id){
+		public function update_product($data,$files, $productName){
 			
 			$productName = mysqli_real_escape_string($this->db->link, $data['productName']);
-			$brand = mysqli_real_escape_string($this->db->link, $data['brand']);
-			$category = mysqli_real_escape_string($this->db->link, $data['category']);
-			$size = mysqli_real_escape_string($this->db->link, $data['size']);
+			
 			$price = mysqli_real_escape_string($this->db->link, $data['price']);
-			$type = mysqli_real_escape_string($this->db->link, $data['type']);
 			$description = mysqli_real_escape_string($this->db->link, $data['description']);
 
 			$permited=array('jpg','jpeg','png','gif');
@@ -95,10 +93,7 @@
 	    	$unique_image=substr(md5(time()), 0, 10).'.'.$file_ext;
 	    	$uploaded_image="uploads/".$unique_image;
 
-			if($productName == "" || $brand == "" || $category == "" || $size == "" || $price == "" || $type == ""){
-				$alert = "<span>Vui lòng không để trống thông tin</span>";
-				return $alert;
-			}else{
+			
 				if(!empty($file_name)){
 					if($file_size > 1048567){
 						$alert = "<span>Kích thước ảnh quá lớn</span>";
@@ -111,41 +106,35 @@
 					}
 					$query = "UPDATE tbl_product 
 							  SET productName = '$productName' , 
-							      brandId = '$brand' ,
-							      catId = '$category' ,  
-							      size = '$size' , 
 							      price = '$price', 
 							      description = '$description' , 
-							      image = '$unique_image' , 
-							      type = '$type'   
-							    WHERE productId = '$id'";
+							      image = '$unique_image' 						       
+							    WHERE productName = '$productName'";
 
 				}else{
 					$query = "UPDATE tbl_product 
 							  SET productName = '$productName' ,
-							  	  brandId = '$brand' , 
-							  	  catId = '$category' ,  
-							  	  size = '$size' , 
+							  	 
 							  	  price = '$price', 
-							  	  description = '$description' , 
-							  	  type = '$type'   
-							  WHERE productId = '$id'";
+							  	  description = '$description'  
+							  	   
+							  WHERE productName = '$productName'";
 				}
 			
 
 				
 				$result = $this->db->update($query);
 				if($result){
-					$alert = "<span>Update thành công</span";
+					$alert = "<span >Update thành công</span";
 					return $alert;
 
 				}
 				else{
-					$alert = "<span>Update không thành công</span";
+					$alert = "<span >Update không thành công</span";
 					return $alert;	
 				}
-
-			}	
+			
+			
 		}
 		public function delete_product($id){
 			$query = "DELETE  FROM tbl_product WHERE productId = '$id' ";
@@ -162,9 +151,7 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
-		// public function insert_thumb()
-
-		/////////////////////////////////////
+		
 		public function Get_ProductFeathered(){
 			$query = "SELECT  A.productName, C.brandName,B.catName,A.price,A.image,A.type,A.description
 					  FROM tbl_product A, tbl_category B, tbl_brand C
@@ -173,7 +160,6 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
-
 		public function get_ProductNew(){
 			$query = "SELECT A.productId, A.productName, C.brandName,B.catName,A.price,A.image,A.type,A.description
 					  FROM tbl_product A, tbl_category B, tbl_brand C
@@ -197,8 +183,8 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
-		public function Show_ProductByCat($catName){
-			$query = "SELECT * FROM tbl_product A, tbl_category B, tbl_brand C WHERE A.catId=B.catId AND A.brandId=C.brandId AND B.catName ='$catName' GROUP BY A.productName ORDER BY A.productName DESC";
+		public function Show_ProductByName($Name){
+			$query = "SELECT * FROM tbl_product A, tbl_category B, tbl_brand C WHERE A.catId=B.catId AND A.brandId=C.brandId AND productName ='$Name' GROUP BY productName LIMIT 1";
 			$result = $this->db->select($query);
 			return $result;
 		}
@@ -207,5 +193,57 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
+		public function updateQuantity($id,$quantity){
+
+			$id = mysqli_real_escape_string($this->db->link, $data['productId']);
+			
+			$quantity = $this->fm->validation($quantity);
+			$quantity = mysqli_real_escape_string($this->db->link, $data['quantity']);
+			if(empty($quantity)){
+				$alert = "Vui lòng điền thông tin brand";
+				return $alert;
+			}else{
+				$query = "UPDATE tbl_product SET quantity = $quantity WHERE productId = '$id' ";
+				$result = $this->db->update($query);
+				if($result){
+					$alert = "<span class='success' >Ad thành công</span";
+					return $alert;
+					header('Location:product.php');
+
+				}
+				else{
+					$alert = "Lỗi. Add quantity thất bại";
+					return $alert;	
+				}
+			}
+		}
+		public function add_Size_Product($productName,$size,$quantity){
+			// $productName = $this->fm->validation($productName);
+			// $productName = mysqli_real_escape_string($this->db->link, $productName);
+			$size = $this->fm->validation($size);
+			$size = mysqli_real_escape_string($this->db->link, $size);
+			$quantity = $this->fm->validation($quantity);
+			$quantity = mysqli_real_escape_string($this->db->link, $quantity);
+
+			$query_select = "SELECT * FROM tbl_product WHERE productName = '$productName' ";
+			$get_product = $this->db->select($query_select);
+			if($get_product){
+				while ($result = $get_product->fetch_assoc()) {
+					$brandId = $result['brandId'];
+					$catId = $result['catId'];
+					$description = $result['description'];
+					$image = $result['image'];
+					$type = $result['type'];
+					$price = $result['price'];
+					
+				}
+
+			}
+			$query = "INSERT INTO tbl_product(productName, catId, brandId, size ,price, image, type,description, quantity) VALUES ('$productName','$catId','$brandId','$size','$price','$image','$type','$description','$quantity')";
+			$insert = $this->db->insert($query);
+			
+		}
+	
+
 	}
  ?>

@@ -99,6 +99,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
             </div>
             <div class="form-group">
 
+                <label> Quantity </label>
+                <input type="text" name="quantity" class="form-control" placeholder="Enter price">
+            </div>
+            <div class="form-group">
+
                 <label> Description </label>
                 <input type="text" name="description" class="form-control" placeholder="Enter Description">
             </div>
@@ -169,8 +174,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
             <th> Category </th>
             <th> Brand </th>
             <th> Price </th>
-            <th> Size </th>
-            <th> EDIT </th>
+           
+            <th> DETAILS </th>
             <th> DELETE </th>
           </tr>
         </thead>
@@ -192,14 +197,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
             <td> <?php echo $result['brandName']; ?></td>
            
              <td><?php echo $result['price'] ?></td>
-              <td> <?php echo $result['size']; ?></td>
+             
            
 
             <td>
                 <form action="" method="post ">
                    
-                    <a href="productdetails.php?brandid=<?php echo $result['productName']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Edit</a>
-                    <!-- <button  type="button" name="edit_btn" class="btn btn-success" data-toggle="modal" data-target="#editbrand">EDIT</button> -->
+                    <a href="productdetails.php?name=<?php echo $result['productName']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">DETAILS</a>
+                    
                 </form>
             </td>
             <td>
