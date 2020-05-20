@@ -5,9 +5,12 @@ include('includes/navbar.php');
 
 ?>
 <?php include '../classes/cart.php'?>
+<?php include '../classes/bill.php'?>
+
 
 <?php 
   $cart = new cart();
+  $bill = new bill();
   if(isset($_POST["delete_id"])){
     $id = $_POST["delete_id"];
         $delbrand = $cart->delete_Discount($id);
@@ -101,7 +104,7 @@ include('includes/navbar.php');
         <tbody>
           <?php
            
-            $show = $cart->show_Discount();
+            $show = $bill->show_Discount();
             if($show){
               $i = 0;
               while($result = $show->fetch_assoc()){

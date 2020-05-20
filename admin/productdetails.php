@@ -36,6 +36,10 @@ h3{
 <?php
     $prod = new product();
     $cat = new category();
+
+    
+    // get name product
+
     if(!isset($_GET['name']) || $_GET['name']==NULL){
     echo "<script>window.location = 'productlist.php'</script>";
 
@@ -43,6 +47,11 @@ h3{
     $name = $_GET['name'];
 
     }
+
+    // xoa product theo size
+    
+
+
     $product= $prod->Show_ProductByName($name);
       if($product){
         while ($result = $product->fetch_assoc()){
@@ -50,13 +59,13 @@ h3{
 
         }
     }
+    // update product
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updaepro'])){
 
-    // if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
-
-    // $updateProd = $prod->update_product($_POST,$_FILES,$name);
-    // }
+    $updateProd = $prod->update_product($_POST,$_FILES,$name);
+    }
     
-
+    // add size
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addsize'])){
 
         $quantity = $_POST['quantity'];
@@ -66,14 +75,15 @@ h3{
         $insert_product = $prod->add_Size_Product($name,$size,$quantity);
     }
 
-    // if(isset($_POST["update_Quanti"])){
-    //     $id = $_POST["update_Quanti"];
-    //     $quantity = $_POST["quantity"];
-
-    //     $delbrand = $brand->updateQuantity($id,'1000');
-  // }
+    
     
 ?> 
+<?php 
+  if(isset($_POST["delete_id"])){
+    $id = $_POST["delete_id"];
+        $delSize = $prod->delete_product($id);
+  }
+ ?>
 
 <!-- Begin editproduct -->
 <div class="modal fade" id="editproduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -126,7 +136,7 @@ h3{
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+            <button type="submit" name="updaepro" class="btn btn-primary">Save</button>
         </div>
       </form>
 
@@ -208,16 +218,14 @@ h3{
     </div>
     
      <?php 
+          
+                
           $get_list= $prod->Show_ProductByName($name);
           if($get_list){
               while($result_prod = $get_list->fetch_assoc()){
                 ?>     
     <div class="card-body">
-      <?php
-                    if(isset($updateProd)){
-                        echo $updateProd;
-                    }
-                ?> 
+     
       
      
       <form action="" method="POST">
@@ -241,10 +249,11 @@ h3{
               
           </div>
         </div>
-        
+        <form action="" method="post">
+          
         <div class="scroll">
          
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <table class="table table-bordered" id="editable_table" width="100%" cellspacing="0">
                 <thead>
                   <tr>
                     <th> ID </th>
@@ -263,22 +272,20 @@ h3{
                                     while ($result = $Sizelist->fetch_assoc()) {        
                             ?>
                   <tr>
-                    <td> 1 </td>
+                    <td> <?php echo $result['productId']?> </td>
                     <td> <?php echo $result['size']?></td>
-                    <td contenteditable="true" id="quantity" name="quantity"> 
+                   <td  id="quantity" name="quantity"> 
                         <?php echo $result['quantity']?>
-                    </td>
+                    </td> 
                     
                     <td>
-                      
-                        <!--  <input type="hidden" name="edit_id" value="<?php echo $result['admin_User']; ?>">
-                        <button  type="submit" name="edit_btn" class="btn btn-success"> EDIT</button> -->
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">UPDATE</a>
+                        <a href="updatequan.php?porid=<?php echo $result['productId']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">UPDATE</a>
+                        
                      
                     </td>
                     <td>
                       
-                        <input type="hidden" name="update_Quanti" value="<?php echo $result['productId']?>">
+                        <input type="hidden" name="delete_id" value="<?php echo $result['productId']?>">
                         <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
                      
                     </td>
@@ -293,6 +300,7 @@ h3{
               </table>
                
             </div>
+            </form>
 
 
         <div class="modal-footer">
@@ -310,6 +318,26 @@ h3{
   </div>
 </div>
 </form>
+<script type="text/javascript">
+       $('#editable_table').Tabledit({
+      url:'action.php',
+      columns:{
+       identifier:[0, "productId"],
+       editable:[[1, 'size'], [2, 'quantity']]
+      },
+      restoreButton:false,
+      onSuccess:function(data, textStatus, jqXHR)
+      {
+       if(data.action == 'DELETE')
+       {
+        $('#'+data.id).remove();
+       }
+      }
+     });
+ 
+});  
+
+</script>
 
 <!-- /.container-fluid -->
 <?php

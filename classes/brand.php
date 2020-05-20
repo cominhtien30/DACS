@@ -68,7 +68,7 @@
 				$query = "UPDATE tbl_brand SET brandName = '$brandName' WHERE brandId = '$id'";
 				$result = $this->db->update($query);
 				if($result){
-					$alert = "<span class='success' >Update brand thành công</span";
+					$alert = "<span class='text-danger' >Update brand thành công</span";
 					return $alert;
 					header('Location:brand.php');
 

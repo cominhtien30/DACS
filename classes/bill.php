@@ -54,6 +54,12 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
+		public function get_Bill(){
+
+			$query = "SELECT * FROM tbl_order ORDER BY order_Id DESC";
+			$result = $this->db->select($query);
+			return $result;
+		}
 
 		public function delete_Order($id){
 			$query = "DELETE  FROM tbl_order WHERE order_Id = '$id' ";
@@ -106,6 +112,25 @@
 			if($result){
 				return $result;
 			}
+		}
+		public function update_Status($id,$data){
+			$status = mysqli_real_escape_string($this->db->link, $data['status']);
+			$id = mysqli_real_escape_string($this->db->link, $id);
+
+			
+			$query = "UPDATE tbl_order SET status = '$status' WHERE order_Id = '$id'";
+			$result = $this->db->update($query);
+			if($result){
+				$alert = "<span class='text-danger' >Update status thành công</span";
+				return $alert;
+				
+
+			}
+			else{
+				$alert = "Lỗi. Update staus thất bại";
+				return $alert;	
+			}
+			
 		}
 	}
  ?>

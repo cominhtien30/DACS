@@ -125,12 +125,12 @@
 				
 				$result = $this->db->update($query);
 				if($result){
-					$alert = "<span >Update thành công</span";
+					$alert = "<span class='text-success >Update thành công</span";
 					return $alert;
 
 				}
 				else{
-					$alert = "<span >Update không thành công</span";
+					$alert = "<span class='text-success >Update không thành công</span";
 					return $alert;	
 				}
 			
@@ -156,7 +156,7 @@
 			$query = "SELECT  A.productName, C.brandName,B.catName,A.price,A.image,A.type,A.description
 					  FROM tbl_product A, tbl_category B, tbl_brand C
 					  WHERE A.catId = B.catId AND A.brandId = C.brandId AND A.type = '1'
-					  GROUP by A.productName";
+					  GROUP by A.productName LIMIT 8";
 			$result = $this->db->select($query);
 			return $result;
 		}
@@ -165,7 +165,7 @@
 					  FROM tbl_product A, tbl_category B, tbl_brand C
 					  WHERE A.catId = B.catId AND A.brandId = C.brandId
 					  GROUP by A.productName
-					  ORDER BY A.productId DESC LIMIT 4";
+					  ORDER BY A.productId DESC LIMIT 8";
 			$result = $this->db->select($query);
 			return $result;
 		}
@@ -179,7 +179,7 @@
 			return $result;
 		}
 		public function getSize_1Product($name){
-			$query = "SELECT * FROM tbl_product WHERE productName = '$name'";
+			$query = "SELECT * FROM tbl_product WHERE productName = '$name' ORDER BY size ASC";
 			$result = $this->db->select($query);
 			return $result;
 		}
@@ -195,27 +195,22 @@
 		}
 		public function updateQuantity($id,$quantity){
 
-			$id = mysqli_real_escape_string($this->db->link, $data['productId']);
-			
+			$id = mysqli_real_escape_string($this->db->link, $id);
 			$quantity = $this->fm->validation($quantity);
-			$quantity = mysqli_real_escape_string($this->db->link, $data['quantity']);
-			if(empty($quantity)){
-				$alert = "Vui lòng điền thông tin brand";
-				return $alert;
-			}else{
-				$query = "UPDATE tbl_product SET quantity = $quantity WHERE productId = '$id' ";
+			$quantity = mysqli_real_escape_string($this->db->link,$quantity);
+			
+				$query = "UPDATE tbl_product SET quantity = '$quantity' WHERE productId = '$id' ";
 				$result = $this->db->update($query);
 				if($result){
-					$alert = "<span class='success' >Ad thành công</span";
+					$alert = "<span class='text-success' >Update thành công</span";
 					return $alert;
-					header('Location:product.php');
 
 				}
 				else{
-					$alert = "Lỗi. Add quantity thất bại";
+					$alert = '<span class="text-danger">Lỗi. Cập nhật thông tin không thành công</span>';
 					return $alert;	
 				}
-			}
+			
 		}
 		public function add_Size_Product($productName,$size,$quantity){
 			// $productName = $this->fm->validation($productName);
