@@ -27,7 +27,7 @@
 		
 			<center>
 				<?php
-            $show = $ct->get_Bill_Max();
+            $show = $bill->get_Bill_Max();
                 if($show){
                            
                     while($result = $show->fetch_assoc()){

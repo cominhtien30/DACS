@@ -42,8 +42,9 @@
 
 			}
 			
-			$query_order = "INSERT INTO tbl_order ( buyer, receiver, phone, email, city, district, address, totalprice) VALUES ('$buyerr','$name','$phone','$email','$city','$district','$address','$total')";
+			$query_order = "INSERT INTO tbl_order ( buyer, receiver, phone, email, address, totalprice) VALUES ('$buyerr','$name','$phone','$email','$address','$total')";
 			$insertOder = $this->db->insert($query_order);
+			return $insertOder;
 			}
 		
 		
@@ -71,6 +72,40 @@
 			$query = "SELECT a.order_Id, a.date , a.buyer, a.receiver, a.phone,a.email,a.totalprice,a.address, b.name as 'city', c.name as 'dis' FROM tbl_order a, tbl_city b, tbl_district c WHERE a.city=b.matp AND a.district=c.maqh AND order_Id = '$id'";
 			$result = $this->db->select($query);
 			return $result;
+		}
+		public function insert_OrderDetail($MaxId){
+			$session_id = session_id();
+			$query = "SELECT * FROM tbl_cart WHERE ssId = '$session_id'";
+			$get_cart = $this->db->select($query);
+			if($get_cart){
+				while ($result = $get_cart->fetch_assoc()) {
+					$productName = $result['productName'];
+					$size = $result['size'];
+					$quantity = $result['quantity'];
+					$image = $result['image'];
+					$price = $result['price'];
+					$query = "INSERT INTO tbl_orderdetails(id_order, productName, size, quantity, image, price) VALUES ('$MaxId','$productName','$size','$quantity','$image','$price')";
+					$insertOrderDetails = $this->db->insert($query);
+					
+
+				}
+			}
+			return $insertOrderDetails;
+		}
+		public function get_Bill_Max(){
+			
+			$query = "SELECT * FROM tbl_order WHERE order_Id= (SELECT max(order_Id) FROM tbl_order)";
+			
+			$get = $this->db->select($query);
+			return $get;
+		}
+		public function show_Discount(){
+			
+			$query = "SELECT * FROM tbl_discount ";
+			$result = $this->db->select($query);
+			if($result){
+				return $result;
+			}
 		}
 	}
  ?>

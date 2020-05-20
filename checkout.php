@@ -19,7 +19,7 @@ $insertOrder = $bill->insert_Order($_POST,$buyer);
 $MaxId = $ct->get_Max_Id();
 if($MaxId){
 while ($result = $MaxId->fetch_assoc()){
-$insertOrderDetails = $ct->insert_OrderDetail($result['order_Id']);
+$insertOrderDetails = $bill->insert_OrderDetail($result['order_Id']);
 }
 }
 $destroyCart = $ct->Del_cart_by_Session();
@@ -229,26 +229,6 @@ header('Location:success.php');
         
     </section>
     
-    <script>
-    $(document).ready(function(){
-    $('#city').change(function(){
-    var matp = $('#city option:selected').val();
-    // alter(matp);
-    data = {
-    city:1,
-    matp:matp
-    };
-    $.ajax({
-    url:"cityy.php",
-    type:"POST",
-    data:data
-    }).done(function(result){
-    $('#district').html(result);
-    
-    })
-    })
-    });
-    </script>
     
     <?php
     

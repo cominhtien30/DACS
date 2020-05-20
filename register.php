@@ -9,22 +9,9 @@ $check = Session::get('customer_login');
  ?>
 <?php
 
-if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_buy'])){
-$buyer= Session::get('customer_user');
-$insertOrder = $ct->insert_Order($_POST,$buyer);
-$MaxId = $ct->get_Max_Id();
-if($MaxId){
-while ($result = $MaxId->fetch_assoc()){
-
-$insertOrderDetails = $ct->insert_OrderDetail($result['order_Id']);
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])){
+    $insert_Customer=$user->insert_Customer($_POST);
 }
-}
-$destroyCart = $ct->Del_cart_by_Session();
-header('Location:success.php');
-}
-// else{
-//   echo "<script>window.location = '404.php'</script>";
-// }
 ?>
  <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript" charset="utf-8" async defer></script>
                     <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
@@ -103,6 +90,11 @@ header('Location:success.php');
         
         <div class="checkout__form">
             <h4>Register User</h4>
+            <center><h3><?php if (isset($insert_Customer)) {
+            echo $insert_Customer;
+
+      } ?></h3></center>
+      <center><h4>Nếu Đã Có Tài Khoản <a style="color: #7fad39" href="login.php">Tiến Hành Đăng Nhập</a></h4></center>
             <form action="register.php" method="post">
                 <div class="row">
                     <div class="modal-body">
@@ -130,44 +122,11 @@ header('Location:success.php');
                         </div>
                         <div class="checkout__input">
                             <p> Password<span>*</span></p>
-                            <input type="text" name="password" placeholder="Enter Password">
+                            <input type="password" name="password" placeholder="Enter Password">
                         </div>
                         <div class="checkout__input">
                             <p>Repeat Password<span>*</span></p>
-                            <input type="text" name="repeatpassword" placeholder="Repeat Password">
-                        </div>
-                        
-                        
-                        
-                        <div class="checkout__input">
-                            <p>Town/City<span>*</span></p>
-                            <select  id="city" name="city" >
-                            	 <option value="null">Select City</option>
-                                <?php
-                                $citylist = $city->Show_City();
-                                if($citylist){
-                                	while ($resultCity = $citylist->fetch_assoc()){
-                                ?>
-                               
-                                <option  data-name="<?= $resultCity['matp'] ?>" value="<?php echo $resultCity['matp'] ?>"><?php echo $resultCity['name'] ?></option>
-                                <?php 
-                                	      }
-                                    }
-                                 ?>
-                      
-                               
-                            </select>
-                        </div>
-                        <div class="checkout__input">
-                            <p>District<span>*</span></p>
-                            <select id="district" name="district">
-                                <option value="null">Chọn Quận Huyện</option>
-                            </select>
-                        </div>
-                        <div class="checkout__input">
-                            <p>Address<span>*</span></p>
-                            <input type="text" name="address" placeholder="Enter Address" class="checkout__input__add">
-                            
+                            <input type="password" name="repeatpassword" placeholder="Repeat Password">
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
@@ -182,9 +141,16 @@ header('Location:success.php');
                                     <input type="text" name="email" placeholder="Enter Email">
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Address<span>*</span></p>
+                                    <input type="text" name="address" placeholder="Enter Address">
+                                </div>
+                            </div>
                         </div>
                         <td>
-                        	<input type="submit" value="Register" name="register">
+                        	
+                        <center><button style="width: 100%;" type="submit" class="site-btn" name="register">Register</button></center>
                         </td>
                     </div>  	
                     
@@ -194,27 +160,6 @@ header('Location:success.php');
         
     </section>
     
-    <script>
-
-                      $(document).ready(function(){
-                         $('#city').change(function(){
-                            var matp = $('#city option:selected').val();
-                            data = {
-                                city:1,
-                                matp:matp
-                            };
-                            $.ajax({
-                                url:"getdistrict.php",
-                                type:"POST",
-                                 data:data
-                        }).done(function(result){
-                         $('#district').html(result);
-                
-                        })
-                    })
-
-                });
-                    </script>
 
     <?php
     include 'inc/footer.php';

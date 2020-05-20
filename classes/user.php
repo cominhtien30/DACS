@@ -35,38 +35,45 @@
 
 			$name = mysqli_real_escape_string($this->db->link, $data['name']);
 			$username = mysqli_real_escape_string($this->db->link, $data['username']);
-			
 			$address = mysqli_real_escape_string($this->db->link, $data['address']);
 			$phone = mysqli_real_escape_string($this->db->link, $data['phone']);
-			$password = mysqli_real_escape_string($this->db->link, md5($data['password']));
-			
+			$password = mysqli_real_escape_string($this->db->link, $data['password']);
+			$repeatpassword = mysqli_real_escape_string($this->db->link, $data['repeatpassword']);
 			$email = mysqli_real_escape_string($this->db->link, $data['email']);
 			
 
 			if($name == "" || $username == ""  || $address == "" || $phone == "" || $password == "" || $email == ""){
-				$alert = "<span>Vui lòng không để trống thông tin</span>"; 
+				$alert = '<span class="text-danger">Vui lòng không để trống thông tin</span>'; 
 				return $alert;
 			}else{
 				$check = "SELECT * FROM tbl_customer WHERE username= '$username' OR emailCus = '$email' OR phone = '$phone' ";
 				$result_check = $this->db->select($check);
 				if($result_check){
-					$alert = "<span>Người dùng đã tồn tại</span>";
+					$alert = '<span class="text-danger">Người dùng đã tồn tại , ! Vui lòng kiểm tra lại thông tin Mail, Phone, Username</span>';
 					return $alert;
 				}else{
-					$query = "INSERT INTO tbl_customer( username ,  password ,  nameCus ,  emailCus ,    address ,  phone ) VALUES ('$username','$password','$name','$email','$address','$phone')";
-					$result = $this->db->insert($query);
-					if($result){
-						$alert = "<span>Đăng ký khách hàng thành công</span>";
+					if ($password!=$repeatpassword) {
+						$alert='<span class="text-danger">Mật Khẩu Không Trùng Khớp</span>';
 						return $alert;
+					}else{
+						$password=md5($password);
+						$query = "INSERT INTO tbl_customer( username ,  password ,  nameCus ,  emailCus ,    address ,  phone ) VALUES ('$username','$password','$name','$email','$address','$phone')";
+						$result = $this->db->insert($query);
+						if($result){
+							$alert = '<span class="text-success">Đăng ký khách hàng thành công</span>';
+							return $alert;
+						}
+						else{
+							$alert = '<span class="text-danger">Lỗi. Đăng ký khách hàng thất bại</span>';
+								return $alert;	
+						}
 					}
-					else{
-						$alert = "<span>Lỗi. Đăng ký khách hàng thất bại</span>";
-						return $alert;	
-					}
+					
 				
 				}
 
 			}
+			return $result;
 		}
 		 // 
 		public function Login_Customer($data){
@@ -112,7 +119,6 @@
 					$query = "UPDATE tbl_customer SET nameCus='$name',emailCus='$email',address='$address',phone='$phone' WHERE username = '$userr'";
 					$result = $this->db->update($query);
 					
-					return $tien;
 					if($result){
 						$alert = '<span class="text-success" >Cập nhật thông tin thành công</span>';
 						return $alert;
@@ -124,7 +130,7 @@
 					$query = "UPDATE tbl_customer SET nameCus='$name',emailCus='$email',address='$address',phone='$phone',password=md5('$password') WHERE username = '$userr'";
 					$result = $this->db->update($query);
 					if($result){
-						$alert = '<span class="text-success" >Cập nhật thông tin thành công</span>';						return $alert;
+						$alert = '<span class="text-success" >Cập nhật thông tin thành công </span>';						return $alert;
 					}
 					else{
 						$alert = '<span class="text-danger">Lỗi. Cập nhật thông tin không thành công</span>';

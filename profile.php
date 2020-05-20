@@ -93,6 +93,9 @@ input[type=password], select {
         
         <div class="checkout__form">
             <h4>YOUR PROFILE</h4>
+            <center><h3><?php if (isset($updateCus)) {
+            echo $updateCus;
+      } ?></h3></center>
             <form action="" method="post">
             <div class="row">
                 <table  id="customers" width="100%">
@@ -162,9 +165,7 @@ input[type=password], select {
         
           <center><button type="submit" class="site-btn" name="submit">UPDATE</button></center>
       </form> 
-      <p><?php if (isset($updateCus)) {
-            echo $updateCus;
-      } ?></p>
+      
                     </div>
 </section>
 
