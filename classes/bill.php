@@ -42,7 +42,7 @@
 
 			}
 			
-			$query_order = "INSERT INTO tbl_order ( buyer, receiver, phone, email, address, totalprice) VALUES ('$buyerr','$name','$phone','$email','$address','$total')";
+			$query_order = "INSERT INTO tbl_order ( buyer, receiver, phone, email, address, totalprice,status) VALUES ('$buyerr','$name','$phone','$email','$address','$total','0')";
 			$insertOder = $this->db->insert($query_order);
 			return $insertOder;
 			}
@@ -113,9 +113,10 @@
 				return $result;
 			}
 		}
-		public function update_Status($id,$data){
-			$status = mysqli_real_escape_string($this->db->link, $data['status']);
+		public function update_Status($status,$id){
+			
 			$id = mysqli_real_escape_string($this->db->link, $id);
+			$status = mysqli_real_escape_string($this->db->link, $status);
 
 			
 			$query = "UPDATE tbl_order SET status = '$status' WHERE order_Id = '$id'";

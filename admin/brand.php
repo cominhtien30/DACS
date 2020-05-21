@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include('includes/header.php'); 
 include('includes/navbar.php'); 
 
@@ -13,15 +14,36 @@ include('includes/navbar.php');
   }
 
  ?>
-
-<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <?php 
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addbrand'])){
 
-        $brandName = $_POST['brandName']; 
+        $brandName = $_POST['brandNameAdd']; 
         $insertName = $brand->insert_Brand($brandName);
     }
        ?>
+
+<?php 
+
+   if(isset($_POST["test"])){
+     $id = $_POST["test"];
+     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editbrand'])){
+
+     
+      $brandName = $_POST['brandNameEdit'];
+       
+
+        $updateBrand = $brand->update_brand($brandName,$id);
+    
+    }
+
+  }
+  
+     
+  
+
+ ?>
+<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -39,7 +61,8 @@ include('includes/navbar.php');
             <div class="form-group">
 
                 <label> Brand name </label>
-                <input type="text" name="brandName" class="form-control" placeholder="Enter Brand">
+
+                <input type="text" name="brandNameAdd" class="form-control" placeholder="Enter Brand">
                 
             </div>
             
@@ -47,7 +70,45 @@ include('includes/navbar.php');
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+            <button type="submit" name="addbrand" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editbrand" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Brand</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+      </div>
+     
+      <form action="" method="POST">
+
+        <div class="modal-body">
+
+            <div class="form-group">
+
+                <label> Brand name </label>
+                <input type="hidden" name="test" id="test"  value="">
+              
+                <input type="text" name="brandNameEdit"  class="form-control" >
+                
+                
+            </div>
+            
+        
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" name="editbrand" class="btn btn-primary">Save</button>
         </div>
       </form>
 
@@ -70,7 +131,7 @@ include('includes/navbar.php');
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">BRANDS 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
-              Add Brand 
+              ADD BRAND
             </button>
     </h6>
   </div>
@@ -107,8 +168,8 @@ include('includes/navbar.php');
             <td>
                 <form action="" method="post ">
                     <input type="hidden" name="edit_id" value="<?php echo $result['brandId']?>">
-                    <a href="editbrand.php?brandid=<?php echo $result['brandId']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Edit</a>
-                    <!-- <button  type="button" name="edit_btn" class="btn btn-success" data-toggle="modal" data-target="#editbrand">EDIT</button> -->
+                    <!-- <a href="editbrand.php?brandid=<?php echo $result['brandId']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Edit</a> -->
+                    <button  type="button" id="edit_btn" class="btn btn-success" data-toggle="modal" data-target="#editbrand">EDIT</button>
                 </form>
             </td>
             <td>
@@ -131,11 +192,24 @@ include('includes/navbar.php');
 </div>
 
 </div>
-
+<script>
+  $(document).ready(function(){
+    
+    $("#dataTable").on('click','#edit_btn',function(){
+      var currentRow = $(this).closest("tr");
+      var id=currentRow.find("td:eq(0)").text();
+      $("#test").val(id);
+      
+    });
+ });
+  
+  
+</script>
 
 <!-- /.container-fluid -->
 
 <?php
 include('includes/scripts.php');
 include('includes/footer.php');
+ob_end_flush();
 ?>

@@ -2,7 +2,6 @@
     include 'inc/header.php';
 
 ?>
-
     <section class="hero hero-normal">
         <div class="container">
             <div class="row">

@@ -2,29 +2,30 @@
 include 'inc/header.php';
 ?>
 <?php
-$login = Session::get('customer_login');
-if($login == false){
-header('Location:login.php');
-}
+        $login = Session::get('customer_login');
+        if($login == false){
+        header('Location:login.php');
+        }
+        ?>
+        <?php
+        $a=Session::get('qtt');
+        if($a == '0')
+        header('Location:index.php');
 ?>
 <?php
-$a=Session::get('qtt');
-if($a == '0')
-header('Location:index.php');
-?>
-<?php
-if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_buy'])){
-$buyer= Session::get('customer_user');
-$insertOrder = $bill->insert_Order($_POST,$buyer);
-$MaxId = $ct->get_Max_Id();
-if($MaxId){
-while ($result = $MaxId->fetch_assoc()){
-$insertOrderDetails = $bill->insert_OrderDetail($result['order_Id']);
-}
-}
-$destroyCart = $ct->Del_cart_by_Session();
-header('Location:success.php');
-}
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_buy'])){
+        $buyer= Session::get('customer_user');
+        $insertOrder = $bill->insert_Order($_POST,$buyer);
+        $MaxId = $ct->get_Max_Id();
+        if($MaxId){
+            while ($result = $MaxId->fetch_assoc()){
+            $insertOrderDetails = $bill->insert_OrderDetail($result['order_Id']);
+            }
+            }
+        $destroyCart = $ct->Del_cart_by_Session();
+        // $updateQuantity = $prod->updateQuantityCheckout($_POST);
+        header('Location:success.php');
+    }
 // else{
 //   echo "<script>window.location = '404.php'</script>";
 // }
@@ -180,6 +181,7 @@ header('Location:success.php');
                                     echo $fm->textShorten($result['productName'],25)
                                     ?>  <span><?php echo $result['price']?></span></li>
                                     <input type="hidden" name="quantity" value="<?php echo $result['quantity']?>"/>
+                                    <input type="hidden" name="size" value="<?php echo $result['size']?>"/>
                                     <?php
                                     }
                                     }

@@ -124,10 +124,13 @@ include 'inc/header.php';
                         <td><?php echo $result['totalprice'] ?></td>
                         <?php
                         if ($result['status']==0) {
-                        echo '<td class="text-danger">Pedding</td>';
+                          echo '<td class="text-danger">Pedding</td>';
                         }elseif($result['status']==1){
-                        echo '<td class="text-success">Success</td>';
-                        }
+                         echo '<td class="text-success">Shipping</td>';
+                        }elseif($result['status']==2)
+                         echo '<td class="text-success">Success</td>';
+                        else
+                            echo '<td class="text-danger">Canncel</td>';
                         ?>
                         
                         

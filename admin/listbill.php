@@ -10,20 +10,68 @@ include ("../helpers/format.php");
   $fm=new format();
     
  ?>
-
  <?php 
-;
-  if(isset($_POST["updatestt"])){
-    $id = $_POST["updatestt"];
-    
-  }
-  if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
 
-    // $status = $_POST['status'];
-    $updatestt = $bill->update_Status($id,$_POST);
+   if(isset($_POST["test"])){
+     $id = $_POST["test"];
+     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
+
+     $status = $_POST['status'];
+     $updatestt = $bill->update_Status($status,$id);
+    
+    
     }
 
+  }
+  
+     
+  
+
  ?>
+ <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add BRANDS</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+      </div>
+     
+      <form action="" method="POST">
+
+        <div class="modal-body">
+
+            <div class="form-group">
+
+                <label> Brand name </label>
+                <input type="hidden" name="test" id="test"  value="">
+                <!-- <input type="text" name="brandName" class="form-control" placeholder="Enter Brand"> -->
+                <select class="form-control"  id="status" name="status">
+                    
+                  
+                        <option  selected value="0">Pedding</option>
+                        <option value="1">Shipping</option>
+                        <option value="2">Success</option>
+                        <option value="3">Canncel</option>
+                   
+                  </select>
+                
+            </div>
+            
+        
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" name="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
 <div class="container-fluid">
 
 <!-- DataTales Example -->
@@ -32,14 +80,16 @@ include ("../helpers/format.php");
     <h6 class="m-0 font-weight-bold text-primary">ALL BILL
             
     </h6>
+    
   </div>
 
   <div class="card-body">
   <form action="" method="post">
+  
 
     <div class="table-responsive">
 
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      <table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
         <thead>
           <tr>
             <th> ID </th>
@@ -61,55 +111,35 @@ include ("../helpers/format.php");
                     
                     ?>
           <tr>
-            <td><a href="billdetails.php?idbill=<?php echo $result['order_Id']?>">#<?php echo $result['order_Id'] ?></a></td>
+             
+            <td value="idbill" name="idbill" data-name="<?= $result['order_Id'] ?>" ><a href="billdetails.php?idbill=<?php echo $result['order_Id']?>"> <?php echo $result['order_Id'] ?></a></td>
             <td><?php echo $fm->formatDate($result['date']) ?></td>
             <td><?php echo $result['receiver'] ?></td>
             <td><?php echo $result['totalprice'] ?></td>
             <td><?php echo $result['address'] ?></td>
-            <td>
-                <form action="" method="post">
-                	<select class="form-control"  id="status" name="status">
-                    <?php 
-                        if($result['status'] ==0){                               
-                     ?>
-                        <option selected value="0">Chưa xử lý</option>
-                        <option value="1">Giao hàng</option>
-                        <option value="2">Hoàn thành</option>
-                        <option value="3">Hủy đơn</option>
-                    <?php 
-                    }elseif($result['status'] ==1){
-                    ?>
-                        <option  value="0">Chưa xử lý</option>
-                        <option  selected value="1">Giao hàng</option>
-                        <option value="2">Hoàn thành</option>
-                        <option value="3">Hủy đơn</option>
-                    <?php 
-                    }elseif ($result['status'] ==2) {
-                      
+            
+                
+          	<?php
+                  if ($result['status']==0) {
+                    echo '<td class="text-danger">Pedding</td>';
+                  }elseif($result['status']==1){
+                   echo '<td class="text-success">Shipping</td>';
+                  }elseif($result['status']==2)
+                   echo '<td class="text-success">Success</td>';
+                  else
+                      echo '<td class="text-danger">Canncel</td>';
+                  ?>
                     
-                     ?>
-                        <option  value="0">Chưa xử lý</option>
-                        <option  value="1">Giao hàng</option>
-                        <option  selected value="2">Hoàn thành</option>
-                        <option value="3">Hủy đơn</option>
-                     <?php 
-                    }else{
-                     ?>
-                        <option  value="0">Chưa xử lý</option>
-                        <option  value="1">Giao hàng</option>
-                        <option  value="2">Hoàn thành</option>
-                        <option selected value="3">Hủy đơn</option>
-                     <?php 
-                    }
-                     ?>
-                	</select>
-                    
-                </form>
-            </td>
+               
+          
             <td>
                 
                   <input type="hidden" name="updatestt" value="<?php echo $result['order_Id']?>">
-                 <button  type="submit" name="submit" class="btn btn-success"> SAVE </button>
+                 <!-- <button  type="submit" name="submit" class="btn btn-success"> SAVE </button> -->
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
+              EDIT
+            </button> -->
+                  <input  id="edit" type="button" name="submit" class="btn btn-primary" value="EDIT" data-toggle="modal" data-target="#addadminprofile">
                  
                
             </td>
@@ -120,14 +150,29 @@ include ("../helpers/format.php");
                     ?>
         </tbody>
       </table>
-
+        
     </div>
   </form>
   </div>
 </div>
 
 </div>
-<script type="jquery.min.js">
+<script>
+  $(document).ready(function(){
+    
+    $("#dataTable").on('click','#edit',function(){
+      
+      var currentRow = $(this).closest("tr");
+      var id=currentRow.find("td:eq(0)").text();
+      // var status=currentRow.find("td:eq(5)").val(); 
+      
+      // var show = id;
+      // alert(show);
+      $("#test").val(id);
+      // $("#statuss").val(matp);
+    });
+ });
+  
   
 </script>
 <?php

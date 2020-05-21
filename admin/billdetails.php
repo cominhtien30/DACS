@@ -45,7 +45,21 @@ h4{
 <!-- /.container-fluid -->
 
 
+<?php 
 
+  if (isset($_GET['idbill'])) {
+      $id_bill=$_GET['idbill'];
+    }
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
+
+     $status = $_POST['status'];
+    
+    }
+     $updatestt = $bill->update_Status($status,$id_bill);
+  
+  
+
+ ?>
 
 
 
@@ -54,8 +68,10 @@ h4{
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">BILL DETAILS 
-           
+
     </h6>
+     <form action="" method="POST">
+           
   </div>
 
   <div class="card-body">
@@ -64,6 +80,9 @@ h4{
 
      <form action="" method="POST">
       <h4>PRODUCT ORDER</h4>
+      
+      
+        </tbody>
       <div class="scroll">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
@@ -78,9 +97,7 @@ h4{
         </thead>
         <tbody>
           <?php 
-             if (isset($_GET['idbill'])) {
-                $id_bill=$_GET['idbill'];
-              }
+             
 
 
               $get_BillDetails=$bill->get_BillDetails($id_bill);

@@ -69,7 +69,7 @@
 
 
 		public function Show_Product(){
-			$query = "SELECT A.productName,A.image,A.size, C.brandName,B.catName,A.price,A.type,A.description FROM tbl_product A, tbl_category B, tbl_brand C WHERE A.catId=B.catId AND A.brandId=C.brandId GROUP BY A.productName, A.description, A.price  ORDER BY A.productName  DESC";
+			$query = "SELECT A.productName,A.image,A.size, C.brandName,B.catName,A.price,A.type,A.description FROM tbl_product A, tbl_category B, tbl_brand C WHERE  A.catId=B.catId AND A.brandId=C.brandId GROUP BY A.productName, A.description, A.price  ORDER BY A.productName  DESC";
 			$result = $this->db->select($query);
 			return $result;
 		}
@@ -212,6 +212,18 @@
 				}
 			
 		}
+		public function updateQuantityCheckout($productName,$size,$quantity){
+			$productName = mysqli_real_escape_string($this->db->link, $data['productName']);
+			$size = mysqli_real_escape_string($this->db->link, $data['size']);
+			$quantity = mysqli_real_escape_string($this->db->link, $data['quantity']);
+			
+			
+				$query = "UPDATE tbl_product SET quantity = '$quantity' WHERE name = '$name' AND  size = '$size";
+				$result = $this->db->update($query);
+				
+			
+		}
+		
 		public function add_Size_Product($productName,$size,$quantity){
 			// $productName = $this->fm->validation($productName);
 			// $productName = mysqli_real_escape_string($this->db->link, $productName);
@@ -230,12 +242,15 @@
 					$image = $result['image'];
 					$type = $result['type'];
 					$price = $result['price'];
-					
+					$size1 = $result['size'];
 				}
 
 			}
-			$query = "INSERT INTO tbl_product(productName, catId, brandId, size ,price, image, type,description, quantity) VALUES ('$productName','$catId','$brandId','$size','$price','$image','$type','$description','$quantity')";
-			$insert = $this->db->insert($query);
+			if($size1==$size){
+				$query = "INSERT INTO tbl_product(productName, catId, brandId, size ,price, image, type,description, quantity) VALUES ('$productName','$catId','$brandId','$size','$price','$image','$type','$description','$quantity')";
+				$insert = $this->db->insert($query);
+			
+			}
 			
 		}
 	

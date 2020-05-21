@@ -78,12 +78,7 @@ h3{
     
     
 ?> 
-<?php 
-  if(isset($_POST["delete_id"])){
-    $id = $_POST["delete_id"];
-        $delSize = $prod->delete_product($id);
-  }
- ?>
+
 
 <!-- Begin editproduct -->
 <div class="modal fade" id="editproduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -261,7 +256,7 @@ h3{
                     <th> Quantity </th>
                     
                     <th> EDIT </th>
-                    <th> DELETE </th>
+                   
                   </tr>
                 </thead>
                 <tbody>
@@ -283,12 +278,7 @@ h3{
                         
                      
                     </td>
-                    <td>
-                      
-                        <input type="hidden" name="delete_id" value="<?php echo $result['productId']?>">
-                        <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
-                     
-                    </td>
+                    
                   </tr>
                  
                   <?php  
@@ -298,15 +288,14 @@ h3{
                   
                 </tbody>
               </table>
+              
                
             </div>
+          
             </form>
 
 
-        <div class="modal-footer">
-          <button onclick="location.href='listadmin.php'" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
-        </div>
+       
       </form>
       
     </div>
@@ -318,26 +307,7 @@ h3{
   </div>
 </div>
 </form>
-<script type="text/javascript">
-       $('#editable_table').Tabledit({
-      url:'action.php',
-      columns:{
-       identifier:[0, "productId"],
-       editable:[[1, 'size'], [2, 'quantity']]
-      },
-      restoreButton:false,
-      onSuccess:function(data, textStatus, jqXHR)
-      {
-       if(data.action == 'DELETE')
-       {
-        $('#'+data.id).remove();
-       }
-      }
-     });
- 
-});  
 
-</script>
 
 <!-- /.container-fluid -->
 <?php
