@@ -140,7 +140,7 @@
                                         <h5><?php echo $result['productName'] ?> </h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        <?php echo $result['price']." VNĐ"?> 
+                                        <?php echo $result['price']?> 
                                     </td>
                                     <td class="shoping__cart__price">
                                         <?php echo $result['size']?> 
@@ -151,7 +151,7 @@
 
                                     <td class="shoping__cart__total">
                                         <?php $total= $result['price'] * $result['quantity'];                               
-                                    echo $total." VNĐ";
+                                    echo $total;
                                     
                                     ?>
                                     </td>

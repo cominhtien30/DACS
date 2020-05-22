@@ -2,7 +2,6 @@
     include 'inc/header.php';
 
 ?>
-
     <section class="hero hero-normal">
         <div class="container">
             <div class="row">
@@ -15,10 +14,10 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="" method="post">
+                            <form action="#">
                                 
-                                <input type="text" name="search" placeholder="What do yo u need?">
-                                <button type="submit" name="submit" class="site-btn">SEARCH</button>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -46,8 +45,7 @@
                         <h2>BUG SHOP</h2>
                         <div class="breadcrumb__option">
                             <a href="./index.html">Home</a>
-                          
-                        <span>All Product</span>
+                            <span>All Product</span>
                         </div>
                     </div>
                 </div>
@@ -171,26 +169,7 @@
                 <div class="col-lg-9 col-md-7">
                    
                         <div class="section-title product__discount__title">
-                                   <?php  
-                            
-                        
-                        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-                             $name=$_POST['search'];
-                             echo "<h2>Tìm kiếm với '$name'</h2>";
-                            
-                        }elseif($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['namepro'])) {
-                            $name=$_GET['namepro'];
-                           echo "<h2>Tìm kiếm với '$name'</h2>";
-                        }else{
-                           echo'<h2>ALL PRODUCT</h2>';
-                        
-                        }
-                        
-                        
-
-                        
-                        ?>
-                            
+                            <h2>ALL PRODUCT</h2>
                             <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
@@ -217,21 +196,9 @@
                     </div>
                     <div class="row">
                             <?php  
-                            if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['namepro'])) {
-                                 $searchget=" A.productName LIKE  '%".$_GET['namepro']."%' AND";
-                             }else{
-                                $searchget="";
-                             }
                         
-                        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-                             $searchpost=" A.productName LIKE  '%".$_POST['search']."%' AND";
-                             
-                            
-                        }else{
-                           $searchpost='';
-                        }
-
-                        $prodList = $pro->Show_Product($searchpost,$searchget);
+                    
+                        $prodList = $pro->Show_Product();
                         if($prodList){
                         
                             while ($result = $prodList->fetch_assoc()) {
@@ -249,7 +216,7 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="details.php?proname=<?php echo $result['productName'] ?>"><?php echo $result['productName'] ?></a></h6>
-                                    <h5>$<?php echo  $fm->format_currency($result['price']) ?></h5>
+                                    <h5>$<?php echo $result['price'] ?></h5>
                                 </div>
                             </div>
                         </div>

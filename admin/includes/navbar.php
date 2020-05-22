@@ -18,7 +18,7 @@
   <div class="sidebar-brand-icon rotate-n-15">
     <i class="fas fa-laugh-wink"></i>
   </div>
-  <div class="sidebar-brand-text mx-3">FUNDA <sup>WEB IT</sup></div>
+  <div class="sidebar-brand-text mx-3">BUG SHOP <sup></sup></div>
 </a>
 <!-- Divider -->
 <hr class="sidebar-divider my-0">

@@ -115,7 +115,7 @@ include ("../helpers/format.php");
             <td value="idbill" name="idbill" data-name="<?= $result['order_Id'] ?>" ><a href="billdetails.php?idbill=<?php echo $result['order_Id']?>"> <?php echo $result['order_Id'] ?></a></td>
             <td><?php echo $fm->formatDate($result['date']) ?></td>
             <td><?php echo $result['receiver'] ?></td>
-            <td><?php echo $result['totalprice'] ?></td>
+            <td>$<?php echo $fm->format_currency($result['totalprice']) ?></td>
             <td><?php echo $result['address'] ?></td>
             
                 
