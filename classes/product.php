@@ -68,8 +68,8 @@
 
 
 
-		public function Show_Product(){
-			$query = "SELECT A.productName,A.image,A.size, C.brandName,B.catName,A.price,A.type,A.description FROM tbl_product A, tbl_category B, tbl_brand C WHERE  A.catId=B.catId AND A.brandId=C.brandId GROUP BY A.productName, A.description, A.price  ORDER BY A.productName  DESC";
+		public function Show_Product($searchpost,$searchget){
+			$query = "SELECT A.productName,A.image,A.size, C.brandName,B.catName,A.price,A.type,A.description FROM tbl_product A, tbl_category B, tbl_brand C WHERE ".$searchpost." ".$searchget."  A.catId=B.catId AND A.brandId=C.brandId GROUP BY A.productName, A.description, A.price  ORDER BY A.productName  DESC";
 			$result = $this->db->select($query);
 			return $result;
 		}
@@ -253,6 +253,11 @@
 			}
 			
 		}
+		// public function searchProductbyname($name){
+		// 	$query = "SELECT A.productName,A.image,A.size, C.brandName,B.catName,A.price,A.type,A.description FROM tbl_product A, tbl_category B, tbl_brand C WHERE A.productName LIKE '%".$name."%' AND  A.catId=B.catId AND A.brandId=C.brandId GROUP BY A.productName, A.description, A.price  ORDER BY A.productName  DESC";
+		// 	$result = $this->db->select($query);
+		// 	return $result;
+		// }
 	
 
 	}

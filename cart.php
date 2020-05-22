@@ -90,10 +90,15 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
-                                
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                           <form action="product.php" method="GET">
+                                <!-- <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div> -->
+
+                                <input type="text" name="namepro" placeholder="What do yo u need?">
+                                <button type="" class="site-btn">SEARCH</button>
+
                             </form>
                         </div>
                         <div class="hero__search__phone">
