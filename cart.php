@@ -269,7 +269,11 @@
 
                             <li>Total <span><?php  
                                     
+<<<<<<< HEAD
                                      $alltotal= ($sub_total - $a);
+=======
+                                     $alltotal= ($sub_total - ($result['discount']* $sub_total)/100);
+>>>>>>> 14cd884c0399761f5fc607d4fe93e52e868c6978
                                      echo '$'.$fm->format_currency($alltotal);
                                     Session::set('qtt',$sl);
                                     Session::set('total',$alltotal);
@@ -283,7 +287,11 @@
                                          
                                     <li>Total <span><?php  
                                     
+<<<<<<< HEAD
                                     $alltotal= ($sub_total - $a);
+=======
+                                    $alltotal= ($sub_total - ($result['discount']* $sub_total)/100);
+>>>>>>> 14cd884c0399761f5fc607d4fe93e52e868c6978
                                     echo '$'.$fm->format_currency($alltotal);
                                     Session::set('qtt',$sl);
                                     Session::set('total',$alltotal);
