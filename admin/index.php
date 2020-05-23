@@ -1,7 +1,11 @@
 <?php
 include('includes/header.php'); 
 include('includes/navbar.php'); 
+include ("../helpers/format.php");
+
 ?>
+<?php include '../classes/bill.php'?>
+
 
 
 <!-- Begin Page Content -->
@@ -45,7 +49,22 @@ include('includes/navbar.php');
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+              <?php 
+                $fm = new Format();
+                $bill = new bill();
+                $gettotal = $bill->totalprice();
+                if($gettotal){
+                  while ($result = $gettotal->fetch_assoc()) {
+                   
+
+                  ?>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">$ <?php echo $fm->format_currency($result['total']) ?></div>
+              <?php 
+                  }
+                }
+
+               ?>
+              
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -88,8 +107,25 @@ include('includes/navbar.php');
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><a  style="color: #F6C23E" href="listbill.php">Pending Requests</a></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">
+
+                <?php 
+                
+                $pending =$bill->getPending();
+                if($pending){
+                  while ($result = $pending->fetch_assoc()) {
+                  
+                  ?>
+                  <?php echo $result['status'] ?>
+                  
+                  <?php 
+
+                  }
+                }
+                ?>
+
+               </div>
             </div>
             <div class="col-auto">
               <i class="fas fa-comments fa-2x text-gray-300"></i>

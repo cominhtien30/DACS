@@ -228,7 +228,7 @@ h3{
         <div class="rows">
            
           <div class="col-4">
-            <img src="upload/<?php echo $result_prod['image']?>" width="400px">
+            <img src="uploads/<?php echo $result_prod['image']?>" width="400px">
           </div>
           <div class=" col-8">
             <h3 class="m-0 font-weight-bold text-primary"><?php echo $result_prod['productName'] ?></h3>
@@ -239,7 +239,7 @@ h3{
            
              <h5 id="redd">Category: <?php echo $result_prod['catName'] ?></h5>
              
-              <h5 id="redd">Size: <?php echo $result_prod['catSize'] ?></h5>
+              
             <h3>Price: <?php echo $result_prod['price'] ?></h3>
               
           </div>

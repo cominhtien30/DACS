@@ -46,16 +46,26 @@
 				$alert = '<span class="text-danger">Vui lòng không để trống thông tin</span>'; 
 				return $alert;
 			}else{
-				$check = "SELECT * FROM tbl_customer WHERE username= '$username' OR emailCus = '$email' OR phone = '$phone' ";
+				$check = "SELECT * FROM tbl_customer ";
 				$result_check = $this->db->select($check);
-				if($result_check){
-					$alert = '<span class="text-danger">Người dùng đã tồn tại , ! Vui lòng kiểm tra lại thông tin Mail, Phone, Username</span>';
+					$data=mysqli_fetch_array($result_check);
+					$check_mail=$data['emailCus'];
+					$check_username=$data['username'];
+					$check_phone=$data['phone'];
+				if($username==$check_username){
+					$alert = '<span class="text-danger">Username Tồn Tại</span>';
 					return $alert;
-				}else{
-					if ($password!=$repeatpassword) {
+				}elseif ($email==$check_mail) {
+					$alert = '<span class="text-danger">Email Tồn Tại</span>';
+					return $alert;
+				}elseif ($phone==$check_phone) {
+					$alert = '<span class="text-danger">Phone Tồn Tại</span>';
+					return $alert;
+				}
+				if ($password!=$repeatpassword) {
 						$alert='<span class="text-danger">Mật Khẩu Không Trùng Khớp</span>';
 						return $alert;
-					}else{
+				}else{
 						$password=md5($password);
 						$query = "INSERT INTO tbl_customer( username ,  password ,  nameCus ,  emailCus ,    address ,  phone ) VALUES ('$username','$password','$name','$email','$address','$phone')";
 						$result = $this->db->insert($query);
@@ -72,14 +82,13 @@
 				
 				}
 
-			}
 			return $result;
 		}
 		 // 
 		public function Login_Customer($data){
 			$username = mysqli_real_escape_string($this->db->link, $data['username']);
 			$password = mysqli_real_escape_string($this->db->link, md5($data['password']));	
-				$check = "SELECT * FROM tbl_customer WHERE username= '$username' OR emailCus= '$username' OR phone= '$username'  AND password='$password'";
+			$check = "SELECT * FROM tbl_customer WHERE (username= '$username' OR emailCus= '$username' OR phone= '$username')  AND password ='$password' limit 1";
 				$result_check = $this->db->select($check);
 				if($result_check){
 					$value = $result_check-> fetch_assoc();
@@ -87,10 +96,9 @@
 					Session::set('customer_user',$value['username']);
 					Session::set('customer_name',$value['nameCus']);
 					header('location:index.php');
-					
 				
 				}else{
-					$alert = "<span> Sai tài khoản hoặc mật khẩu</span>"; 
+					$alert = '<span class="text-danger" > Sai tài khoản hoặc mật khẩu</span>'; 
 					return $alert; 	
 				}
 

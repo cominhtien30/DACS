@@ -74,7 +74,7 @@
                     ?>
                         <ul>
 
-                            <li><a href="#"><?php echo $result['brandName']; ?></a></li>
+                            <li><a href="product.php?brandid=<?php echo $result['brandId'] ?>,&brandName=<?php echo $result['brandName'] ?>"><?php echo $result['brandName']; ?></a></li>
                             
                         </ul>
                         <?php
@@ -173,18 +173,21 @@
                         <div class="section-title product__discount__title">
                                    <?php  
                             
-                        
                         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                              $name=$_POST['search'];
-                             echo "<h2>Tìm kiếm với '$name'</h2>";
+                             echo "<h2>Search By '$name'</h2>";
                             
                         }elseif($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['namepro'])) {
                             $name=$_GET['namepro'];
-                           echo "<h2>Tìm kiếm với '$name'</h2>";
-                        }else{
+                           echo "<h2>Search By '$name'</h2>";
+                        }elseif ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['brandid'])) {
+                            $brandname=$_GET['brandName'];
+                           echo "<h2>Brand : $brandname </h2>";
+                        } else{
                            echo'<h2>ALL PRODUCT</h2>';
                         
                         }
+                       
                         
                         
 
@@ -231,14 +234,22 @@
                            $searchpost='';
                         }
 
-                        $prodList = $pro->Show_Product($searchpost,$searchget);
-                        if($prodList){
                         
-                            while ($result = $prodList->fetch_assoc()) {
                             
                         
                  ?>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        
+
+             <?php 
+                if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['brandid'])) {
+                    $id=$_GET['brandid'];
+                    $getProByBrand=$pro->Show_ProductByBrand($id);
+                    if($getProByBrand){
+                            while ($result = $getProByBrand->fetch_assoc()) {
+
+                        
+               ?>
+                <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="admin/uploads/<?php echo $result['image']?>">
                                     <ul class="product__item__pic__hover">
@@ -249,14 +260,43 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="details.php?proname=<?php echo $result['productName'] ?>"><?php echo $result['productName'] ?></a></h6>
-                                    <h5>$<?php echo $result['price'] ?></h5>
+                                    <h5>$<?php echo  $fm->format_currency($result['price']) ?></h5>
                                 </div>
                             </div>
                         </div>
-                        <?php 
-                    }
+            <?php 
                 }
-             ?>
+            }
+             ?>            
+                                 
+            <?php
+                }else{
+                    $prodList = $pro->Show_Product($searchpost,$searchget);
+                        if($prodList){
+                        
+                            while ($result = $prodList->fetch_assoc()) {
+            ?>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="admin/uploads/<?php echo $result['image']?>">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="details.php?proname=<?php echo $result['productName'] ?>"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="details.php?proname=<?php echo $result['productName'] ?>"><?php echo $result['productName'] ?></a></h6>
+                                    <h5>$<?php echo   $fm->format_currency($result['price']) ?></h5>
+                                </div>
+                            </div>
+                        </div>
+
+            <?php 
+                    }   
+                }
+            }
+              ?>
                     </div>
                         </div>
                         

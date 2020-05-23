@@ -7,7 +7,9 @@ include('includes/navbar.php');
 <?php include '../classes/category.php'?>
 <?php include '../classes/product.php'?>
 
+
 <?php 
+  $fm=new format();
   $brand = new brand();
   $cat = new category();
   $prod = new product();
@@ -182,7 +184,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
         <tbody>
           <?php
            
-            $prodList = $prod->Show_Product();
+            $prodList = $prod->Show_ProductAdmin();
             if($prodList){
               $i = 0;
               while ($result = $prodList->fetch_assoc()) {
@@ -196,7 +198,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
             <td> <?php echo $result['catName']; ?></td>
             <td> <?php echo $result['brandName']; ?></td>
            
-             <td><?php echo $result['price'] ?></td>
+             <td>$<?php echo $fm->format_currency($result['price']) ?></td>
              
            
 

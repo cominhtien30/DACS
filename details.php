@@ -82,11 +82,11 @@ ob_start();
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Vegetable’s Package</h2>
+                        <h2>Product's Package</h2>
                         <div class="breadcrumb__option">
                             <a href="./index.html">Home</a>
-                            <a href="./index.html">Vegetables</a>
-                            <span>Vegetable’s Package</span>
+                            <a href="./index.html">Products</a>
+                            <span>Product's Package</span>
                         </div>
                     </div>
                 </div>
@@ -141,7 +141,7 @@ ob_start();
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span>
                         </div>
-                        <div class="product__details__price"><?php echo $result_1pro['price']." VNĐ" ?></div>
+                        <div class="product__details__price">$<?php echo  $fm->format_currency($result_1pro['price']) ?></div>
                         <p><?php echo $result_1pro['description']?></p>
                          
                             <select id="size" name="size" class="">

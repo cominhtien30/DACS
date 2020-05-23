@@ -2,13 +2,6 @@
     include 'inc/header.php';
 
 ?>
-<?php 
-if(!isset($_GET['id']) || $_GET['id']==NULL){
-        echo "<script>window.location = '404.php'</script>";
-        
-    }else{
-        $id = $_GET['id'];
-    } ?>
     <section class="hero hero-normal">
         <div class="container">
             <div class="row">
@@ -21,15 +14,10 @@ if(!isset($_GET['id']) || $_GET['id']==NULL){
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                           <form action="product.php" method="GET">
-                                <!-- <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
-                                </div> -->
-
-                                <input type="text" name="namepro" placeholder="What do yo u need?">
-                                <button type="" class="site-btn">SEARCH</button>
-
+                            <form action="#">
+                                
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -57,7 +45,7 @@ if(!isset($_GET['id']) || $_GET['id']==NULL){
                         <h2>BUG SHOP</h2>
                         <div class="breadcrumb__option">
                             <a href="./index.html">Home</a>
-                            <span> Product</span>
+                            <span>All Product</span>
                         </div>
                     </div>
                 </div>
@@ -84,7 +72,7 @@ if(!isset($_GET['id']) || $_GET['id']==NULL){
                     ?>
                         <ul>
 
-                            <li><a href="productbrand.php?id=<?php echo $result['brandId'] ?>"><?php echo $result['brandName']; ?></a></li>
+                            <li><a href="#"><?php echo $result['brandName']; ?></a></li>
                             
                         </ul>
                         <?php
@@ -181,21 +169,7 @@ if(!isset($_GET['id']) || $_GET['id']==NULL){
                 <div class="col-lg-9 col-md-7">
                    
                         <div class="section-title product__discount__title">
-                            <?php  
-                        
-                    
-                        $brand = $brand->getnamebyId($id);
-                        if($brand){
-                        
-                            while ($result = $brand->fetch_assoc()) {
-                            
-                        
-                 ?>
-                            <h2><?php echo $result['brandName'] ?>'s Product</h2>
-                              <?php 
-                    }
-                }
-             ?>
+                            <h2>ALL PRODUCT</h2>
                             <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
@@ -224,7 +198,7 @@ if(!isset($_GET['id']) || $_GET['id']==NULL){
                             <?php  
                         
                     
-                        $prodList = $pro->Show_ProductByBrand($id);
+                        $prodList = $pro->Show_Product();
                         if($prodList){
                         
                             while ($result = $prodList->fetch_assoc()) {

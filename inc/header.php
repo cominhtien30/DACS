@@ -151,7 +151,7 @@ $buyer= Session::get('customer_user');
                             <?php  
                                         $a = '0';
                                         $a=Session::get('total');
-                                        echo $a ;
+                                        echo '$'.$fm->format_currency($a) ;
                             ?></span></div>
                     </div>
                 </div>

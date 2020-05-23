@@ -36,17 +36,17 @@ include 'inc/header.php';
                         <span>All departments</span>
                     </div>
                     <ul>
-                        <li><a href="#">Fresh Meat</a></li>
-                        <li><a href="#">Vegetables</a></li>
-                        <li><a href="#">Fruit & Nut Gifts</a></li>
-                        <li><a href="#">Fresh Berries</a></li>
-                        <li><a href="#">Ocean Foods</a></li>
-                        <li><a href="#">Butter & Eggs</a></li>
-                        <li><a href="#">Fastfood</a></li>
-                        <li><a href="#">Fresh Onion</a></li>
-                        <li><a href="#">Papayaya & Crisps</a></li>
-                        <li><a href="#">Oatmeal</a></li>
-                        <li><a href="#">Fresh Bananas</a></li>
+                             <?php
+                        $show = $brand->show_brand();
+                        if($show){
+                           
+                            while($result = $show->fetch_assoc()){
+                         ?>      
+                        <li><a href="product.php?brandid=<?php echo $result['brandId'] ?>,&brandName=<?php echo $result['brandName'] ?>"><?php echo $result['brandName'] ?></a></li>
+                        <?php 
+                            }
+                        }
+                         ?>
                     </ul>
                 </div>
             </div>
@@ -123,7 +123,7 @@ include 'inc/header.php';
                         <td>#<?php echo $result['order_Id'] ?></td>
                         <td><?php echo $fm->formatDate($result['date']) ?></td>
                         <td><?php echo $result['receiver'] ?></td>
-                        <td><?php echo $result['totalprice'] ?></td>
+                        <td>$<?php echo  $fm->format_currency($result['totalprice']) ?></td>
                         <?php
                         if ($result['status']==0) {
                           echo '<td class="text-danger">Pedding</td>';

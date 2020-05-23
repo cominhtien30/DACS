@@ -169,7 +169,7 @@
                                         <h5><?php echo $result['productName']?> </h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        <?php echo $result['price']." VNĐ"?> 
+                                        <?php echo '$'.$fm->format_currency($result['price'])?> 
                                     </td>
                                     <td class="shoping__cart__price">
                                          <?php echo $result['size']?> 
@@ -190,7 +190,7 @@
 
                                     <td class="shoping__cart__total">
                                         <?php $total= $result['price'] * $result['quantity'];                               
-                                    echo $total." VNĐ";
+                                    echo '$'.$fm->format_currency($total);
                                     $sl +=$result['quantity'];
                                     ?>
                                     </td>
@@ -237,7 +237,7 @@
                         <ul>
                             <li>Subtotal <span><?php  
                                     
-                                    echo $sub_total." VNĐ";
+                                    echo '$'.$fm->format_currency($sub_total);
                                     
                                 ?></span></li>
                             <?php 
@@ -253,7 +253,8 @@
 
                                 <span><?php echo $result['discount']."%"?>(<?php 
 
-                                        echo ($result['discount']*$sub_total)/100;
+                                        $a =($result['discount']*$sub_total)/100;
+                                        echo '$'.$fm->format_currency($a);
 
                                   ?>)</span>
                                 <?php 
@@ -268,7 +269,8 @@
 
                             <li>Total <span><?php  
                                     
-                                    echo $alltotal= ($sub_total - ($result['discount']* $sub_total)/100)." VNĐ";
+                                     $alltotal= ($sub_total - $a);
+                                     echo '$'.$fm->format_currency($alltotal);
                                     Session::set('qtt',$sl);
                                     Session::set('total',$alltotal);
                                 ?></td></span></li>
@@ -281,7 +283,8 @@
                                          
                                     <li>Total <span><?php  
                                     
-                                    echo $alltotal= ($sub_total - ($result['discount']* $sub_total)/100)." VNĐ";
+                                    $alltotal= ($sub_total - $a);
+                                    echo '$'.$fm->format_currency($alltotal);
                                     Session::set('qtt',$sl);
                                     Session::set('total',$alltotal);
                                 ?></td></span></li>

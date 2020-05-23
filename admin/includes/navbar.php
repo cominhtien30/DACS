@@ -18,7 +18,7 @@
   <div class="sidebar-brand-icon rotate-n-15">
     <i class="fas fa-laugh-wink"></i>
   </div>
-  <div class="sidebar-brand-text mx-3">FUNDA <sup>WEB IT</sup></div>
+  <div class="sidebar-brand-text mx-3">BUG SHOP <sup></sup></div>
 </a>
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
@@ -38,7 +38,7 @@
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-    <i class="fas fa-fw fa-cog"></i>
+    <i class="fas fa-money-bill-alt"></i>
     <span>Payment</span>
   </a>
   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -56,8 +56,22 @@
  ?>
  <li class="nav-item">
   <a class="nav-link" href="listadmin.php">
-    <i class="fas fa-fw fa-chart-area"></i>
+    <i class="fas fa-users-cog"></i>
     <span>List Admin</span></a>
+</li>
+<li class="nav-item">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+    <i class="fas fa-plus"></i>
+    <span>Manage</span>
+  </a>
+  <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <h6 class="collapse-header">Login Screens:</h6>
+      <a class="collapse-item" href="brand.php">Brand</a>
+      <a class="collapse-item" href="product.php">Products</a>
+      <a class="collapse-item" href="category.php">Category</a>
+       <a class="collapse-item" href="discount.php">Discount</a>
+  </div>
 </li>
 <?php
           }
@@ -68,7 +82,7 @@
 
 
 <!-- Nav Item - Utilities Collapse Menu -->
-<li class="nav-item">
+<!-- <li class="nav-item">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
     <i class="fas fa-fw fa-wrench"></i>
     <span>Utilities</span>
@@ -83,36 +97,21 @@
 
     </div>
   </div>
-</li>
+</li> -->
 
 <!-- Divider -->
-<hr class="sidebar-divider">
-
+<!-- <hr class="sidebar-divider">
+ -->
 <!-- Heading -->
-<div class="sidebar-heading">
-  Addons
-</div>
+
 
 <!-- Nav Item - Pages Collapse Menu -->
 
-<li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-    <i class="fas fa-fw fa-folder"></i>
-    <span>Manage</span>
-  </a>
-  <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-    <div class="bg-white py-2 collapse-inner rounded">
-      <h6 class="collapse-header">Login Screens:</h6>
-      <a class="collapse-item" href="brand.php">Brand</a>
-      <a class="collapse-item" href="product.php">Products</a>
-      <a class="collapse-item" href="category.php">Category</a>
-       <a class="collapse-item" href="discount.php">Discount</a>
-  </div>
-</li>
+
 
 <!-- Nav Item - Charts -->
 <!-- Divider -->
-<hr class="sidebar-divider d-none d-md-block">
+<!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
 <!-- Sidebar Toggler (Sidebar) -->
 <div class="text-center d-none d-md-inline">

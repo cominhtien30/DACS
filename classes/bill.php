@@ -133,5 +133,21 @@
 			}
 			
 		}
+		public function totalprice(){
+			$query = "SELECT SUM(totalprice)  as 'total' FROM tbl_order ";
+			$result = $this->db->select($query);
+			if($result){
+				return $result;
+			}
+		}
+
+		public function getPending(){
+			$query = "SELECT Count(status)  as 'status' FROM tbl_order WHERE status = '0'";
+			$result = $this->db->select($query);
+			if($result){
+				return $result;
+			}
+		}
+
 	}
  ?>

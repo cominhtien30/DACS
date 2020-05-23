@@ -23,7 +23,7 @@
                     ?>
                         <ul>
 
-                            <li><a href="productbrand.php?id=<?php echo $result['brandId'] ?>"><?php echo $result['brandName']; ?></a></li>
+                            <li><a href="product.php?brandid=<?php echo $result['brandId'] ?>,&brandName=<?php echo $result['brandName'] ?>"><?php echo $result['brandName']; ?></a></li>
                             
                         </ul>
                         <?php
@@ -107,7 +107,7 @@
                         </div>
                         <div class="featured__item__text">
                             <h6><a href="#"><?php echo $result['productName'] ?></a></h6>
-                            <h5><?php echo $result['price']." VNĐ" ?> </h5>
+                            <h5>$<?php echo $result['price'] ?> </h5>
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                         </div>
                         <div class="featured__item__text">
                             <h6><a href="#"><?php echo $result['productName'] ?></a></h6>
-                            <h5><?php echo $result['price']." VNĐ" ?> </h5>
+                            <h5>$<?php echo $result['price'] ?> </h5>
                         </div>
                     </div>
                 </div>

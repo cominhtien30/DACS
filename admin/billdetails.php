@@ -8,7 +8,10 @@ include('includes/navbar.php');
 <?php include '../classes/product.php'?>
 <?php include '../classes/bill.php'?>
 
+
+
 <?php 
+  $fm = new Format();
   $brand = new brand();
   $cat = new category();
   $prod = new product();
@@ -50,12 +53,7 @@ h4{
   if (isset($_GET['idbill'])) {
       $id_bill=$_GET['idbill'];
     }
-    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
-
-     $status = $_POST['status'];
     
-    }
-     $updatestt = $bill->update_Status($status,$id_bill);
   
   
 
@@ -113,7 +111,7 @@ h4{
             <td> <?php echo $result['size']; ?></td>
             <td> <?php echo $result['quantity']; ?></td>
            
-             <td><?php echo $result['price'] ?></td>
+             <td>$<?php echo  $fm->format_currency($result['price']) ?></td>
            </tr>
 
         <?php

@@ -16,56 +16,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])){
  <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript" charset="utf-8" async defer></script>
                     <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<section class="hero hero-normal">
+<!-- <section class="hero hero-normal">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <div class="hero__categories">
-                    <div class="hero__categories__all">
-                        <i class="fa fa-bars"></i>
-                        <span>All departments</span>
-                    </div>
-                    <ul>
-                        <li><a href="#">Fresh Meat</a></li>
-                        <li><a href="#">Vegetables</a></li>
-                        <li><a href="#">Fruit & Nut Gifts</a></li>
-                        <li><a href="#">Fresh Berries</a></li>
-                        <li><a href="#">Ocean Foods</a></li>
-                        <li><a href="#">Butter & Eggs</a></li>
-                        <li><a href="#">Fastfood</a></li>
-                        <li><a href="#">Fresh Onion</a></li>
-                        <li><a href="#">Papayaya & Crisps</a></li>
-                        <li><a href="#">Oatmeal</a></li>
-                        <li><a href="#">Fresh Bananas</a></li>
-                    </ul>
-                </div>
+                
             </div>
             <div class="col-lg-9">
-                <div class="hero__search">
-                    <div class="hero__search__form">
-                        <form action="#">
-                            <div class="hero__search__categories">
-                                All Categories
-                                <span class="arrow_carrot-down"></span>
-                            </div>
-                            <input type="text" placeholder="What do yo u need?">
-                            <button type="submit" class="site-btn">SEARCH</button>
-                        </form>
-                    </div>
-                    <div class="hero__search__phone">
-                        <div class="hero__search__phone__icon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="hero__search__phone__text">
-                            <h5>+65 11.188.888</h5>
-                            <span>support 24/7 time</span>
-                        </div>
-                    </div>
-                </div>
+            
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!-- Hero Section End -->
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="img/background.jpg">
@@ -89,12 +51,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])){
     <div class="container">
         
         <div class="checkout__form">
-            <h4>Register User</h4>
+            <h4>Register Account</h4>
             <center><h3><?php if (isset($insert_Customer)) {
             echo $insert_Customer;
 
       } ?></h3></center>
-      <center><h4>Nếu Đã Có Tài Khoản <a style="color: #7fad39" href="login.php">Tiến Hành Đăng Nhập</a></h4></center>
             <form action="register.php" method="post">
                 <div class="row">
                     <div class="modal-body">
@@ -141,13 +102,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])){
                                     <input type="text" name="email" placeholder="Enter Email">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            
+                        </div>
+
                                 <div class="checkout__input">
                                     <p>Address<span>*</span></p>
                                     <input type="text" name="address" placeholder="Enter Address">
                                 </div>
-                            </div>
-                        </div>
+                           
                         <td>
                         	
                         <center><button style="width: 100%;" type="submit" class="site-btn" name="register">Register</button></center>
