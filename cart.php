@@ -154,6 +154,7 @@
                             </thead>
                             <tbody>
                                 <?php 
+                                $a=0;
                                 $sub_total = 0; 
                                 $sl = 0;
                                 $get_cat = $ct->get_Cart();
@@ -252,7 +253,6 @@
                             <li>Discount (<?php echo $result['code']?>) 
 
                                 <span><?php echo $result['discount']."%"?>(<?php 
-
                                         $a =($result['discount']*$sub_total)/100;
                                         echo '$'.$fm->format_currency($a);
 
@@ -269,11 +269,7 @@
 
                             <li>Total <span><?php  
                                     
-<<<<<<< HEAD
                                      $alltotal= ($sub_total - $a);
-=======
-                                     $alltotal= ($sub_total - ($result['discount']* $sub_total)/100);
->>>>>>> 14cd884c0399761f5fc607d4fe93e52e868c6978
                                      echo '$'.$fm->format_currency($alltotal);
                                     Session::set('qtt',$sl);
                                     Session::set('total',$alltotal);
@@ -287,11 +283,7 @@
                                          
                                     <li>Total <span><?php  
                                     
-<<<<<<< HEAD
                                     $alltotal= ($sub_total - $a);
-=======
-                                    $alltotal= ($sub_total - ($result['discount']* $sub_total)/100);
->>>>>>> 14cd884c0399761f5fc607d4fe93e52e868c6978
                                     echo '$'.$fm->format_currency($alltotal);
                                     Session::set('qtt',$sl);
                                     Session::set('total',$alltotal);

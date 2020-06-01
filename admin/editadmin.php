@@ -25,7 +25,7 @@ include('includes/navbar.php');
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Admin Profile 
+    <h6 class="m-0 font-weight-bold text-primary">Thông Tin Admin
             
     </h6>
   </div>
@@ -41,11 +41,11 @@ include('includes/navbar.php');
        
 
             <div class="form-group">
-                <label> Username </label>
+                <label> Tên Người Dùng </label>
                 <input type="text" name="username" class="form-control" value="<?php echo $result['admin_User'] ?>">
             </div>
              <div class="form-group">
-                <label>Name</label>
+                <label>Tên Admin</label>
                 <input type="name" name="name" class="form-control" value="<?php echo $result['admin_Name'] ?>">
             </div>
 
@@ -54,7 +54,7 @@ include('includes/navbar.php');
                 <input type="email" name="email" class="form-control" value="<?php echo $result['admin_Email'] ?>">
             </div>
             <div class="form-group">
-                <label>Password</label>
+                <label>Mật Khẩu</label>
                 <input type="password" name="changepassword" class="form-control" placeholder="Enter New Password">
             </div>
             
@@ -63,8 +63,8 @@ include('includes/navbar.php');
                 echo $update_admin;
        } ?>
         <div class="modal-footer">
-            <button onclick="location.href='listadmin.php'" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="save" class="btn btn-primary">Save</button>
+            <button onclick="location.href='listadmin.php'" type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" name="save" class="btn btn-primary">Lưu</button>
         </div>
       </form>
        <?php 

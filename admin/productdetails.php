@@ -20,11 +20,13 @@ margin-left: -.75rem;
 }
 h5{
   margin-top: 10px;
+  margin-left: 80px;
   color: black;
   width: 80%;
   text-align: justify;
 }
 h3{
+  margin-left: 80px;
   color: red;
   font-weight: bold;
 }
@@ -79,14 +81,14 @@ h3{
     
 ?> 
 
-
+  
 <!-- Begin editproduct -->
 <div class="modal fade" id="editproduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">UPDATE PRODUCT </h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cập Nhât Sản Phẩm</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -101,7 +103,7 @@ h3{
                 ?>
             <div class="form-group">
 
-                <label> Product name </label>
+                <label> Tên Sản Phẩm </label>
                 <input type="text" name="productName" class="form-control" placeholder="Enter Product" value="<?php echo $result_prod['productName'] ?>">
             </div>
              
@@ -109,17 +111,17 @@ h3{
              
             <div class="form-group">
 
-                <label> Price </label>
+                <label> Giá </label>
                 <input type="text" name="price" class="form-control" placeholder="Enter price" value="<?php echo $result_prod['price'] ?>">
             </div>
             <div class="form-group">
 
-                <label> Description </label>
+                <label> Mô Tả </label>
                 <input type="text" name="description" class="form-control" placeholder="Enter Description" value="<?php echo $result_prod['description'] ?>">
             </div>
             <div class="form-group">
 
-                <label> Image </label>
+                <label> Ảnh </label>
                  <img src="uploads/<?php echo $result_prod['image']?>"  width="80" ?>
                 <input type="file" name="image" class="form-control" v >
             </div>
@@ -130,8 +132,8 @@ h3{
          ?>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="updaepro" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" name="updaepro" class="btn btn-primary">Lưu</button>
         </div>
       </form>
 
@@ -145,7 +147,7 @@ h3{
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">UPDATE PRODUCT </h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cập Nhật Sản Phẩm</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -155,7 +157,7 @@ h3{
         <div class="modal-body">
 
             <div class="form-group">
-              <label >Type</label>
+              <label >Loại Sản Phẩm</label>
                  <select id="size" name="size"  class="form-control action">
                   
                             <option>Chọn Size</option>
@@ -181,7 +183,7 @@ h3{
              
             <div class="form-group">
 
-                <label> Quantity </label>
+                <label> Số Lượng </label>
                 <input type="text" id="quantity" name="quantity" class="form-control" placeholder="Enter quantity">
             </div>
             
@@ -189,8 +191,8 @@ h3{
         
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="addsize" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" name="addsize" class="btn btn-primary">Lưu</button>
         </div>
       </form>
 
@@ -202,12 +204,12 @@ h3{
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h3 class="m-0 font-weight-bold text-primary">Product
+      <h3 class="m-0 font-weight-bold text-primary">Danh Sách Sản Phẩm
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editproduct">
-              Update Product
+              Cập Nhật Sản Phẩm
             </button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addsize">
-              Add Size
+              Thêm Size
             </button>
       </h3>
     </div>
@@ -227,7 +229,7 @@ h3{
      
         <div class="rows">
            
-          <div class="col-4">
+          <div class="col-4" >
             <img src="uploads/<?php echo $result_prod['image']?>" width="400px">
           </div>
           <div class=" col-8">
@@ -253,9 +255,9 @@ h3{
                   <tr>
                     <th> ID </th>
                     <th> Size </th>
-                    <th> Quantity </th>
+                    <th> Số Lượng </th>
                     
-                    <th> EDIT </th>
+                    <th> Chỉnh Sửa </th>
                    
                   </tr>
                 </thead>
@@ -274,7 +276,7 @@ h3{
                     </td> 
                     
                     <td>
-                        <a href="updatequan.php?porid=<?php echo $result['productId']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">UPDATE</a>
+                        <a href="updatequan.php?porid=<?php echo $result['productId']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Cập Nhật</a>
                         
                      
                     </td>

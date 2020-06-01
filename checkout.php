@@ -167,7 +167,7 @@ include 'inc/header.php';
                     <div class="col-lg-4 col-md-6">
                         <div class="checkout__order">
                             <h4>Your Order</h4>
-                            <div class="checkout__order__products">Products <span>Total</span></div>
+                            <div class="checkout__order__products">Products  <span>Total</span> </div>
                             <ul>
                                 <?php
                                 
@@ -180,8 +180,11 @@ include 'inc/header.php';
                                 ?>
                                 <li>  <?php
                                     
-                                    echo $fm->textShorten($result['productName'],25)
-                                    ?>  <span><?php echo $result['price']?></span></li>
+                                    echo $fm->textShorten($result['productName'],25);
+                                    echo " X".$result['quantity'];
+                                    ?>  <span><?php echo "$".$fm->format_currency($result['price'])?></span>
+                                    <span></span>
+                                </li>
                                     <input type="hidden" name="quantity" value="<?php echo $result['quantity']?>"/>
                                     <input type="hidden" name="size" value="<?php echo $result['size']?>"/>
                                     <?php
@@ -190,38 +193,15 @@ include 'inc/header.php';
                                     ?>
                                 </ul>
                                 <div class="checkout__order__subtotal">Subtotal <span><?php
-                                    $qtt = '0';
-                                    $qtt=Session::get("total");
-                                    echo $qtt ;
+                                                                       $qtt=Session::get("total");
+                                    echo "$".$fm->format_currency($qtt) ;
                                 ?></span></div>
                                 <div class="checkout__order__total">Total <span><?php
-                                    $qtt = '0';
+                                   
                                     $qtt=Session::get("total");
-                                    echo $qtt ;
+                                    echo "$".$fm->format_currency($qtt) ;
                                 ?></span></div>
-                                <!-- <div class="checkout__input__checkbox">
-                                    <label for="acc-or">
-                                        Create an account?
-                                        <input type="checkbox" id="acc-or">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
-                                <div class="checkout__input__checkbox">
-                                    <label for="payment">
-                                        Check Payment
-                                        <input type="checkbox" id="payment">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="paypal">
-                                        Paypal
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div> -->
+                                
                                 <input type="submit" name="submit_buy"  value="Place Order" style="margin-left: 70px; font-size: 30px;  padding: 0 10px;background:#7fad39; color: white; ">
                                 <!-- <a href="success.php"  type="submit" name="submit_buy" style="margin-left: 70px; font-size: 30px;  padding: 0 10px;background:#7fad39; color: white; ">Place Order</a> -->
                             </div>

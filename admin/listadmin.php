@@ -37,7 +37,7 @@ include('includes/navbar.php');
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Admin </h5>
+        <h5 class="modal-title" id="exampleModalLabel">Thêm Nhân Viên </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -47,11 +47,11 @@ include('includes/navbar.php');
         <div class="modal-body">
             <input type="hidden" name="delete_id" value="">
             <div class="form-group">
-                <label> Username </label>
+                <label> Tên Người Dùng </label>
                 <input type="text" name="username" class="form-control" placeholder="Enter Username">
             </div>
              <div class="form-group">
-                <label>Name</label>
+                <label>Tên Admin</label>
                 <input type="name" name="name" class="form-control" placeholder="Enter name">
             </div>
 
@@ -60,15 +60,15 @@ include('includes/navbar.php');
                 <input type="email" name="email" class="form-control" placeholder="Enter Email">
             </div>
             <div class="form-group">
-                <label>Password</label>
+                <label>Mật Khẩu</label>
                 <input type="password" name="password" class="form-control" placeholder="Enter Password">
             </div>
             <div class="form-group">
-                <label>Confirm Password</label>
+                <label>Xác Nhận Mật Khẩu</label>
                 <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password">
             </div>
             <div class="form-group">
-              <label >Level</label>
+              <label >Chức Vụ</label>
                 <select name="level" class="form-control">
                   <option value= "0">Admin 1</option>
                   <option value= "1">Admin 2</option>
@@ -107,9 +107,9 @@ include('includes/navbar.php');
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Admin Profile 
+    <h6 class="m-0 font-weight-bold text-primary">Danh Sách Admin
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
-              Add Admin Profile 
+              Thêm Admin
             </button>
     </h6>
   </div>
@@ -149,14 +149,14 @@ include('includes/navbar.php');
             <td>
                 <form action="" method="post">
                     <input type="hidden" name="edit_user" value="<?php echo $result['admin_User']; ?>">
-                    <button  type="submit" name="edit_btn" class="btn btn-success"> RESET PASSWORD </button>
+                    <button  type="submit" name="edit_btn" class="btn btn-success"> RESET Mật Khẩu </button>
                      <!-- <a href="editadmin.php?username=<?php echo $result['admin_User']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">EDIT</a> -->
                 </form>
             </td>
             <td>
                 <form action="" method="post">
                   <input type="hidden" name="delete_id" value="<?php echo $result['admin_User']; ?>">
-                  <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
+                  <button type="submit" name="delete_btn" class="btn btn-danger"> Xóa Nhân Viên</button>
                 </form>
             </td>
           </tr>

@@ -56,7 +56,7 @@ include('includes/navbar.php');
             
             <th> Quantity </th>
            
-            <th>EDIT </th>
+            <th>UPDATE </th>
             
           </tr>
         </thead>

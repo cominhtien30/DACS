@@ -148,6 +148,11 @@
 				return $result;
 			}
 		}
+		public function deleteBill($id){
+			$query = "DELETE  FROM tbl_order WHERE order_Id = '$id' ";
+			$result = $this->db->delete($query);
+			return $result;		
+		}
 
 	}
  ?>

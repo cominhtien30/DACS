@@ -30,7 +30,7 @@ include '../classes/adminlogin.php'
           <div class="col-lg-12">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
+                <h1 class="h4 text-gray-900 mb-4">Đăng Nhập !</h1>
                 <span><?php
                   if(isset($login_check)){
                     echo $login_check;
@@ -47,7 +47,7 @@ include '../classes/adminlogin.php'
                     <input type="password" name="admin_Pass" class="form-control form-control-user" placeholder="Password">
                     </div>
                     
-                    <button type="submit" name="login" class="btn btn-primary btn-user btn-block"> Login </button>
+                    <button type="submit" name="login" class="btn btn-primary btn-user btn-block"> Đăng Nhập </button>
                     <hr>
                 </form>
 

@@ -182,7 +182,7 @@
                            echo "<h2>Search By '$name'</h2>";
                         }elseif ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['brandid'])) {
                             $brandname=$_GET['brandName'];
-                           echo "<h2>Brand : $brandname </h2>";
+                           echo "<h2>$brandname's Product </h2>";
                         } else{
                            echo'<h2>ALL PRODUCT</h2>';
                         

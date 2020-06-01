@@ -47,7 +47,7 @@ include('includes/navbar.php');
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add BRANDS</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Thêm Thương Hiệu</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -60,7 +60,7 @@ include('includes/navbar.php');
 
             <div class="form-group">
 
-                <label> Brand name </label>
+                <label> Tên Thương Hiệu </label>
 
                 <input type="text" name="brandNameAdd" class="form-control" placeholder="Enter Brand">
                 
@@ -69,8 +69,8 @@ include('includes/navbar.php');
         
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="addbrand" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" name="addbrand" class="btn btn-primary">Lưu</button>
         </div>
       </form>
 
@@ -78,43 +78,6 @@ include('includes/navbar.php');
   </div>
 </div>
 
-<div class="modal fade" id="editbrand" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Brand</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        
-      </div>
-     
-      <form action="" method="POST">
-
-        <div class="modal-body">
-
-            <div class="form-group">
-
-                <label> Brand name </label>
-                <input type="hidden" name="test" id="test"  value="">
-              
-                <input type="text" name="brandNameEdit"  class="form-control" >
-                
-                
-            </div>
-            
-        
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="editbrand" class="btn btn-primary">Save</button>
-        </div>
-      </form>
-
-    </div>
-  </div>
-</div>
 
 
  
@@ -129,9 +92,9 @@ include('includes/navbar.php');
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">BRANDS 
+    <h6 class="m-0 font-weight-bold text-primary">Danh Sách Thương Hiệu 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
-              ADD BRAND
+             Thêm Thương Hiệu
             </button>
     </h6>
   </div>
@@ -145,10 +108,10 @@ include('includes/navbar.php');
         <thead>
           <tr>
             <th> ID </th>
-            <th> Brand name </th>
+            <th> Tên Thương Hiệu </th>
            
-            <th>EDIT </th>
-            <th>DELETE </th>
+            <th>Chỉnh Sửa </th>
+            <th>Xóa Thương Hiệu </th>
           </tr>
         </thead>
         <tbody>
@@ -156,26 +119,26 @@ include('includes/navbar.php');
            
             $show = $brand->show_brand();
             if($show){
-              $i = 0;
+             
               while($result = $show->fetch_assoc()){
-                $i++;
+                ;
             
           ?>
           <tr>
-            <td> <?php echo $i; ?> </td>
+            <td> <?php echo $result['brandId']; ?> </td>
             <td> <?php echo $result['brandName']; ?></td>
             
             <td>
                 <form action="" method="post ">
                     <input type="hidden" name="edit_id" value="<?php echo $result['brandId']?>">
-                    <!-- <a href="editbrand.php?brandid=<?php echo $result['brandId']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Edit</a> -->
-                    <button  type="button" id="edit_btn" class="btn btn-success" data-toggle="modal" data-target="#editbrand">EDIT</button>
+                    <a href="editbrand.php?brandid=<?php echo $result['brandId']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Chỉnh Sửa</a>
+                  
                 </form>
             </td>
             <td>
                 <form action="" method="post">
                   <input type="hidden" name="delete_id" value="<?php echo $result['brandId']?>">
-                  <button  type="submit" name="delete_btn" class="btn btn-danger">DELETE</button>
+                  <button  type="submit" name="delete_btn" class="btn btn-danger">Xóa</button>
                 </form>
             </td>
           </tr>

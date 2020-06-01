@@ -37,6 +37,11 @@
 			$result = $this->db->select($query);
 			return $result;
 		}
+		public function get_quantity_admin(){
+			$query="SELECT count(*) as 'admin_User' FROM tbl_admin";
+			$result=$this->db->select($query);
+			return $result;
+		}
 		public function insert_Admin($data){
 			// $name = $this->fm->validation($name);
 			// $username = $this->fm->validation($username);

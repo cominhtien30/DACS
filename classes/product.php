@@ -216,17 +216,7 @@
 				}
 			
 		}
-		public function updateQuantityCheckout($productName,$size,$quantity){
-			$productName = mysqli_real_escape_string($this->db->link, $data['productName']);
-			$size = mysqli_real_escape_string($this->db->link, $data['size']);
-			$quantity = mysqli_real_escape_string($this->db->link, $data['quantity']);
-			
-			
-				$query = "UPDATE tbl_product SET quantity = '$quantity' WHERE name = '$name' AND  size = '$size";
-				$result = $this->db->update($query);
-				
-			
-		}
+		
 		
 		public function add_Size_Product($productName,$size,$quantity){
 			// $productName = $this->fm->validation($productName);
@@ -251,10 +241,14 @@
 
 			}
 			if($size1==$size){
+				$alert = "<span class='text-success >ADD không thành công</span";
+					return $alert;	
+			
+			}else{
 				$query = "INSERT INTO tbl_product(productName, catId, brandId, size ,price, image, type,description, quantity) VALUES ('$productName','$catId','$brandId','$size','$price','$image','$type','$description','$quantity')";
 				$insert = $this->db->insert($query);
-			
 			}
+
 			
 		}
 		// public function searchProductbyname($name){

@@ -30,7 +30,7 @@ include('includes/navbar.php');
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Discount</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Thêm Mã Giảm Giá</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -43,13 +43,13 @@ include('includes/navbar.php');
 
             <div class="form-group">
 
-                <label> Coupon code </label>
+                <label> Mã Giảm Giá </label>
                 <input type="text" name="code" class="form-control" placeholder="Enter Coupon code">
 
             </div>
             <div class="form-group">
 
-                <label> Discount </label>
+                <label> Chiết Khấu </label>
                 <input type="text" name="discount" class="form-control"  placeholder="Enter Discount">
                 
             </div>
@@ -57,8 +57,8 @@ include('includes/navbar.php');
         
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" name="registerbtn" class="btn btn-primary">Lưu</button>
         </div>
       </form>
 
@@ -79,9 +79,9 @@ include('includes/navbar.php');
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">DISCOUNT 
+    <h6 class="m-0 font-weight-bold text-primary">Danh Sách Khuyến Mãi 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
-              Add Discount 
+              Thêm Chương Trình
             </button>
     </h6>
   </div>
@@ -95,9 +95,9 @@ include('includes/navbar.php');
         <thead>
           <tr>
             <th> ID </th>
-            <th> Coupon code</th>
-            <th> Discount</th>
-            <th> DELETE </th>
+            <th> Mã Giảm Giá</th>
+            <th> Chiết Khấu</th>
+            <th> Thao Tác </th>
             
           </tr>
         </thead>
@@ -119,7 +119,7 @@ include('includes/navbar.php');
             <td>
                 <form action="" method="post">
                   <input type="hidden" name="delete_id" value="<?php echo $result['id_discount']?>">
-                  <button  type="submit" name="delete_btn" class="btn btn-danger">DELETE</button>
+                  <button  type="submit" name="delete_btn" class="btn btn-danger">Xóa</button>
                 </form>
             </td>
           </tr>

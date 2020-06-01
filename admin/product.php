@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Thêm Sản Phẩm</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -46,11 +46,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
 
             <div class="form-group">
 
-                <label> Product name </label>
+                <label> Tên Sản Phẩm </label>
                 <input type="text" name="productName" class="form-control" placeholder="Enter Product">
             </div>
              <div class="form-group">
-              <label >Brand</label>
+              <label >Thương Hiệu</label>
                 <select class="form-control" id="brand" name="brand">
                   <?php
                                 $brand = new brand();
@@ -70,7 +70,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
              <div class="form-group">
               <label >Category</label>
                 <select id="category" name="category" class="form-control">
-                    <option>Select category</option>
+                    <option>Chọn Danh Mục</option>
 
                     <?php
                                 $cat = new category();
@@ -96,22 +96,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
             </div>
             <div class="form-group">
 
-                <label> Price </label>
+                <label> Giá </label>
                 <input type="text" name="price" class="form-control" placeholder="Enter price">
             </div>
             <div class="form-group">
 
-                <label> Quantity </label>
+                <label> Số Lượng </label>
                 <input type="text" name="quantity" class="form-control" placeholder="Enter price">
             </div>
             <div class="form-group">
 
-                <label> Description </label>
+                <label> Mô Tả </label>
                 <input type="text" name="description" class="form-control" placeholder="Enter Description">
             </div>
             <div class="form-group">
 
-                <label> Image </label>
+                <label> Ảnh </label>
                 <input type="file" name="image" class="form-control" >
             </div>
 <!--             <div class="form-group">
@@ -123,7 +123,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
                 <input type="file" name="thumb4" class="form-control" >
             </div> -->
             <div class="form-group">
-              <label >Type</label>
+              <label >Loại Sản Phẩm</label>
                 <select id="type" name="type" class="form-control">
                             <option>Chọn loại sản phẩm</option>
                             <option value="1">Nổi bật</option>
@@ -133,8 +133,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
         
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" name="registerbtn" class="btn btn-primary">Lưu</button>
         </div>
       </form>
 
@@ -155,9 +155,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">PRODUCTS 
+    <h6 class="m-0 font-weight-bold text-primary">Danh Sách Sản Phẩm 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
-              Add Product 
+             Thêm Sản Phẩm
             </button>
     </h6>
   </div>
@@ -171,14 +171,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
         <thead>
           <tr>
             <th> ID </th>
-            <th> Product name </th>
-            <th> Image </th>
-            <th> Category </th>
-            <th> Brand </th>
-            <th> Price </th>
+            <th> Tên Sản Phẩm </th>
+            <th> Ảnh </th>
+            <th> Danh Mục </th>
+            <th> Thương Hiệu </th>
+            <th> Giá </th>
            
-            <th> DETAILS </th>
-            <th> DELETE </th>
+            <th> Chi Tiết </th>
+            <th> Thao tác </th>
           </tr>
         </thead>
         <tbody>
@@ -205,14 +205,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['registerbtn'])){
             <td>
                 <form action="" method="post ">
                    
-                    <a href="productdetails.php?name=<?php echo $result['productName']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">DETAILS</a>
+                    <a href="productdetails.php?name=<?php echo $result['productName']?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Chi Tiết </a>
                     
                 </form>
             </td>
             <td>
                 <form action="" method="post">
                   <input type="hidden" name="delete_id" value="<?php echo $result['productName']?>">
-                  <button  type="submit" name="delete_btn" class="btn btn-danger">DELETE</button>
+                  <button  type="submit" name="delete_btn" class="btn btn-danger">Xóa</button>
                 </form>
             </td>
           </tr>
